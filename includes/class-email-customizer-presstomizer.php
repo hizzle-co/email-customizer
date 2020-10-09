@@ -32,6 +32,13 @@ class Email_Customizer_Presstomizer {
 	protected $sections = array();
 
 	/**
+	 * Contains a cache of all our sections.
+	 *
+	 * @var array
+	 */
+	protected $controls = array();
+
+	/**
 	 * Class constructor.
 	 *
 	 * @param string $id An alphanumeric unique id for your specific instance.
@@ -55,6 +62,7 @@ class Email_Customizer_Presstomizer {
 		// Remove sections/panels/controls that are not ours.
 		add_filter( 'customize_section_active', array( $this, 'remove_third_party_sections' ), 999999, 2 );
 		add_filter( 'customize_panel_active', array( $this, 'remove_third_party_panels' ), 999999, 2 );
+		add_filter( 'customize_control_active', array( $this, 'remove_third_party_controls' ), 999999, 2 );
 
 		// Do not load core components.
 		add_filter( 'customize_loaded_components', '__return_empty_array', 999999 );
@@ -76,7 +84,7 @@ class Email_Customizer_Presstomizer {
 	 * @return bool
 	 */
 	public function remove_third_party_sections( $is_active, $section ) {
-		return in_array( $section->id, $this->sections, true );
+		return $is_active && in_array( $section->id, $this->sections, true );
 	}
 
 	/**
@@ -88,7 +96,19 @@ class Email_Customizer_Presstomizer {
 	 * @return bool
 	 */
 	public function remove_third_party_panels( $is_active, $panel ) {
-		return in_array( $panel->id, $this->panels, true );
+		return $is_active && in_array( $panel->id, $this->panels, true );
+	}
+
+	/**
+	 * Remover other controls
+	 *
+	 * @param bool                $active Whether the Customizer panel is active.
+	 * @param WP_Customize_Control $control  WP_Customize_Control instance.
+	 *
+	 * @return bool
+	 */
+	public function remove_third_party_controls( $is_active, $control ) {
+		return $is_active && in_array( $control->id, $this->controls, true );
 	}
 
 	/**
@@ -125,6 +145,24 @@ class Email_Customizer_Presstomizer {
 	public function add_section( $customizer, $id, $args = array() ) {
 		$this->sections[] = is_string( $id ) ? $id : $id->id;
 		return $customizer->add_section( $id, $args );
+	}
+
+	/**
+	 * Add a new customizer control.
+	 *
+	 * Use this method to register a control instead of directly calling WP_Customize_Manager::add_control
+	 * so that we can link the control to your customizer instance.
+	 *
+	 * @param WP_Customize_Manager        $customizer An instance of the customize manager class.
+	 * @param WP_Customize_Control|string $id — Customize Control object, or ID.
+	 * @param array                       $args       Optional. Array of properties for the new control object.
+	 * @see WP_Customize_Manager::add_control
+	 *
+	 * @return WP_Customize_Control
+	 */
+	public function add_control( $customizer, $id, $args = array() ) {
+		$this->controls[] = is_string( $id ) ? $id : $id->id;
+		return $customizer->add_control( $id, $args );
 	}
 
 	/**

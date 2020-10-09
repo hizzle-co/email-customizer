@@ -30,8 +30,10 @@ class Email_Customizer {
 	 */
 	public function include_files() {
 
-        require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-presstomizer.php';
-        require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-admin.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-defaults.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-presstomizer.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-admin.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-template.php';
 
     }
 

@@ -1,0 +1,215 @@
+<?php
+/**
+ * Contains the default template values.
+ *
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Contains the default template values.
+ *
+ */
+class Email_Customizer_Defaults {
+
+	/**
+	 * Second footer text;
+	 */
+	public static function footer_2(){
+
+		return sprintf(
+			__( 'Powered by the %1$sEmail Customizer%2$s WordPress plugin', 'email-customizer' ),
+			'<a href="https://github.com/hizzle-co/email-customizer">',
+			'</a>'
+		);
+
+	}
+
+	/**
+	 * First Footer Text;
+	 */
+	public static function footer_1(){
+
+		return sprintf(
+			"&copy;{{YEAR}} %s",
+			sanitize_text_field( get_option( 'blogname' ) )
+		);
+
+	}
+
+	/**
+	 * Second header text;
+	 */
+	public static function header_2(){
+
+		$urls = array(
+			'https://twitter.com'   => esc_url_raw( plugin_dir_url( __FILE__ ) . 'assets/twitter-black.png' ),
+			'https://facebook.com'  => esc_url_raw( plugin_dir_url( __FILE__ ) . 'assets/facebook-black.png' ),
+			'https://instagram.com' => esc_url_raw( plugin_dir_url( __FILE__ ) . 'assets/instagram-black.png' )
+		);
+
+		$markup = array();
+
+		foreach ( $urls as $url => $image ) {
+			$markup[] = "<a href='$url'><img src='$image' width='16' alt=''></a>";
+		}
+		
+		return implode( "&nbsp;", $markup );
+
+	}
+
+	/**
+	 * First Header Text;
+	 */
+	public static function header_1(){
+		return '';
+	}
+
+	/**
+	 * Container Width;
+	 */
+	public static function container_width(){
+		return '600px';
+	}
+
+	/**
+	 * Row Spacing;
+	 */
+	public static function row_spacing(){
+		return '10px';
+	}
+
+	/**
+	 * Background image.
+	 */
+	public static function bg_image(){
+		return '';
+	}
+
+	/**
+	 * Background color.
+	 */
+	public static function bg_color(){
+		return '#f5f5f5';
+	}
+
+	/**
+	 * Logo.
+	 */
+	public static function logo(){
+		return '';
+	}
+
+	/**
+	 * Header font size.
+	 */
+	public static function header_font_size(){
+		return '20px';
+	}
+
+	/**
+	 * Header bg color.
+	 */
+	public static function header_bg(){
+		return '#ffffff';
+	}
+
+	/**
+	 * Header color.
+	 */
+	public static function header_text_color(){
+		return '#212121';
+	}
+
+	/**
+	 * Header link color.
+	 */
+	public static function header_link_color(){
+		return '#0073aa';
+	}
+
+	/**
+	 * Content font size.
+	 */
+	public static function content_font_size(){
+		return '16px';
+	}
+
+	/**
+	 * Content bg color.
+	 */
+	public static function content_bg(){
+		return '#ffffff';
+	}
+
+	/**
+	 * Content color.
+	 */
+	public static function content_text_color(){
+		return '#212121';
+	}
+
+	/**
+	 * Content link color.
+	 */
+	public static function content_link_color(){
+		return '#0073aa';
+	}
+
+	/**
+	 * Footer font size.
+	 */
+	public static function footer_font_size(){
+		return '14px';
+	}
+
+	/**
+	 * Footer bg color.
+	 */
+	public static function footer_bg(){
+		return '#ffffff';
+	}
+
+	/**
+	 * Footer color.
+	 */
+	public static function footer_text_color(){
+		return '#aaaaaa';
+	}
+
+	/**
+	 * Footer link color.
+	 */
+	public static function footer_link_color(){
+		return '#222222';
+	}
+
+	/**
+	 * Additional CSS
+	 */
+	public static function additional_css(){
+		return '';
+	}
+
+	/**
+	 * Default content.
+	 */
+	public static function default_content(){
+
+		$content  = '<p>' . __( 'Your email content will appear here.', 'email-customizer' ) . '</p>';
+		$content .= '<p>' . __( 'You can use any of these placeholders in the template and they will be automatically replaced.', 'email-customizer' ) . '</p>';
+		$content .= '<ul>
+			<li>{{BLOG_URL}}</li>
+			<li>{{HOME_URL}}</li>
+			<li>{{BLOG_NAME}}</li>
+			<li>{{BLOG_DESCRIPTION}}</li>
+			<li>{{DATE}}</li>
+			<li>{{TIME}}</li>
+			<li>{{YEAR}}</li>
+			<li>{{MONTH}}</li>
+			<li>{{DAY}}</li>
+		</ul>';
+		
+	}
+
+}

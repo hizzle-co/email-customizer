@@ -90,3 +90,6 @@ if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
     require plugin_dir_path( __FILE__ ) . 'includes/class-email-customizer.php';
     new Email_Customizer();
 }
+
+// Show both logo and text in the header.
+// Text can be filtered, for example, in case of WooCommerce etc.
