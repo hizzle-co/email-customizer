@@ -11,21 +11,23 @@
 								<tr>
                                     <td align="" class="heading__left-title">
 
-                                        <?php if ( ! empty( $logo ) ) : ?>
-                                            <a href="<?php echo esc_url( home_url() ); ?>">
+                                        <div class="heading__left-title-div">
+                                            <?php if ( ! empty( $logo ) ) : ?>
+                                                <a href="<?php echo esc_url( home_url() ); ?>">
 
-                                                <!--[if gte mso 9]>
-                                                    <img src="<?php echo esc_url( $logo ); ?>" width="110" height="25" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
-                                                <![endif]-->
+                                                    <!--[if gte mso 9]>
+                                                        <img src="<?php echo esc_url( $logo ); ?>" width="110" height="25" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
+                                                    <![endif]-->
 
-                                                <!--[if !gte mso 9]><!-->
-                                                    <img width="110" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
-                                                <!--<![endif]-->
-                                            </a>
-                                        <?php endif; ?>
+                                                    <!--[if !gte mso 9]><!-->
+                                                        <img width="110" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
+                                                    <!--<![endif]-->
+                                                </a>
+                                            <?php endif; ?>
 
-                                        &nbsp;
-                                        <?php echo wp_kses_post( $header_1 ); ?>
+                                            &nbsp;
+                                            <?php echo wp_kses_post( $header_1 ); ?>
+                                        </div>
 
                                     </td>
 								</tr>

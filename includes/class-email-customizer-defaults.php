@@ -62,7 +62,7 @@ class Email_Customizer_Defaults {
 	 * First Header Text;
 	 */
 	public static function header_1(){
-		return '';
+		return sanitize_text_field( get_option( 'blogname' ) );
 	}
 
 	/**
@@ -73,10 +73,17 @@ class Email_Customizer_Defaults {
 	}
 
 	/**
+	 * Header Left Width;
+	 */
+	public static function header_left_width(){
+		return '400px';
+	}
+
+	/**
 	 * Row Spacing;
 	 */
 	public static function row_spacing(){
-		return '10px';
+		return '0px';
 	}
 
 	/**
@@ -194,10 +201,26 @@ class Email_Customizer_Defaults {
 	/**
 	 * Default content.
 	 */
+	public static function before_content(){
+		$url      = esc_url_raw( plugin_dir_url( __FILE__ ) . 'assets/zuzzana.jpg' );
+		$alt      = esc_attr__( 'white hippie glasses neon light decor on door', 'email-customizer' );
+		$image    = "<img src='$url' alt='$alt' class='hero-image'>";
+		$credits  = sprintf(
+			__( 'Photo by %1$s on %2$s', 'email-customizer' ),
+			'Zuzanna Adamczyk',
+			'Unsplash'
+		);
+
+		return "$image <p><i>$credits</i></p>";
+	}
+
+	/**
+	 * Default content.
+	 */
 	public static function default_content(){
 
 		$content  = '<p>' . __( 'Your email content will appear here.', 'email-customizer' ) . '</p>';
-		$content .= '<p>' . __( 'You can use any of these placeholders in the template and they will be automatically replaced.', 'email-customizer' ) . '</p>';
+		$content .= '<p>' . __( 'You can use any of these placeholders in the header and footer texts and they will be replaced by the actual values.', 'email-customizer' ) . '</p>';
 		$content .= '<ul>
 			<li>{{BLOG_URL}}</li>
 			<li>{{HOME_URL}}</li>
@@ -210,6 +233,7 @@ class Email_Customizer_Defaults {
 			<li>{{DAY}}</li>
 		</ul>';
 		
+		return $content;
 	}
 
 }

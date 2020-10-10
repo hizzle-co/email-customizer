@@ -122,7 +122,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			array(
 				'type'                  => 'option',
 				'default'               => $default_value,
-				'transport'             => 'refresh',
+				'transport'             => 'postMessage',
 				'capability'            => 'edit_theme_options',
 				'sanitize_callback'     => 'wp_kses_post',
 				'sanitize_js_callback'  => '',
@@ -341,6 +341,33 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			)
 		);
 
+		// Container Width.
+		$wp_customize->add_setting(
+			'email_customizer[header_left_width]',
+			array(
+				'type'                  => 'option',
+				'default'               => Email_Customizer_Defaults::header_left_width(),
+				'transport'             => 'refresh',
+				'capability'            => 'edit_theme_options',
+				'sanitize_callback'     => '',
+				'sanitize_js_callback'  => '',
+			)
+		);
+
+		$this->add_control(
+			$wp_customize,
+			new WP_Customize_Control(
+				$wp_customize,
+				'email_customizer_header_left_width',
+				array(
+					'label'         => __( 'Left Header Width', 'email-templates' ),
+					'type'          => 'text', 
+					'section'       => 'email_customizer_general',
+					'settings'      => 'email_customizer[header_left_width]',
+				)
+			)
+		);
+
 		// Spacing Width
 		$wp_customize->add_setting(
 			'email_customizer[spacing]',
@@ -422,6 +449,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			Email_Customizer_Defaults::header_1(),
 		);
 
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[header_text_left]',
+			array(
+				'selector'        => '.heading__left-title-div',
+				'render_callback' => array( $this, 'left_title' ),
+			)
+		);
+
 		// Header text.  - Text on the right.
 		$this->add_code(
 			$wp_customize,
@@ -501,6 +536,15 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			array(
 				'title'         => __( 'Content', 'email-customizer' ),
 			)
+		);
+
+		// Header text.  - Text on the right.
+		$this->add_code(
+			$wp_customize,
+			'email_customizer[before_content]',
+			__( 'Before Content', 'email-templates' ),
+			'email_customizer_content',
+			Email_Customizer_Defaults::before_content(),
 		);
 
 		// Text Size.

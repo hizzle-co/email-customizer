@@ -4,14 +4,15 @@
 	xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo get_bloginfo('charset');?>">
 	<!--[if !mso]><!-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!--<![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="x-apple-disable-message-reformatting">
-	<title></title>
+    <title><?php echo get_bloginfo('name'); ?></title>
+    <?php do_action( 'wp_head' ); ?>
 	<style>
 		body {
 			margin: 0;
@@ -133,28 +134,49 @@
             padding-right: 20px;
         }
 
+        .hero-image {
+            vertical-align: top;
+            max-width: 100%;
+            width: <?php echo sanitize_text_field( $container_width ); ?>;
+        }
+
         .card-spacing {
             height: <?php echo sanitize_text_field( $row_spacing ); ?>;
         }
 
-        .components__content .content {
-            padding: 30px 35px;
+        .components__content {
             background-color: <?php echo sanitize_hex_color( $content_bg ); ?>;
             font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
             color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
             border-radius: 5px;
         }
 
-        .components__content .content p,
-        .components__content .content div {
+        .components__content p,
+        .components__content div{
             font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
             color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
         }
 
+        .components__content .content {
+            padding: 30px 35px;
+        }
+
+        .components__content .hero-section p {
+            padding: 20px 35px;
+        }
+
+        .components__content .hero-section a,
+        .components__content .hero-section [x-apple-data-detectors],
         .components__content .content a,
         .components__content .content a[x-apple-data-detectors] {
             color: <?php echo sanitize_hex_color( $content_link_color ); ?>;
             text-decoration: none;
+        }
+
+        .components__content .hero-section i {
+            font-size: 12px;
+            font-style: italic;
+            opacity: 0.7;
         }
 
 		.gmail-fix {

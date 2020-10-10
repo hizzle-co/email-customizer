@@ -14,7 +14,7 @@
 
 		<?php if ( is_customize_preview() ) : ?>
 			<style id="mo-customizer-preview-custom-css"></style>
-			<?php do_action( "presstomizer_email_customizer_customize_footer" ); ?>
+			<?php do_action( 'wp_footer' ); ?>
 		<?php endif; ?>
 
 	</body>
