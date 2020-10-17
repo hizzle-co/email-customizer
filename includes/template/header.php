@@ -1,7 +1,5 @@
-<!DOCTYPE html
-	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
-	xmlns:o="urn:schemas-microsoft-com:office:office">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo get_bloginfo('charset');?>">
@@ -12,7 +10,10 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="x-apple-disable-message-reformatting">
     <title><?php echo get_bloginfo('name'); ?></title>
-    <?php do_action( 'wp_head' ); ?>
+	<?php if ( is_customize_preview() ) : ?>
+		<?php do_action( 'wp_head' ); ?>
+	<?php endif; ?>
+
 	<style>
 		body {
 			margin: 0;
@@ -21,11 +22,6 @@
             mso-line-height-rule: exactly;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
-            background-color: <?php echo sanitize_hex_color( $bg_color ); ?>;
-            background-image: url('<?php echo esc_url( $bg_image ); ?>');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
             font-family: Arial, Helvetica, sans-serif;
 		}
 
@@ -33,11 +29,10 @@
 		td {
 			mso-table-lspace: 0;
 			mso-table-rspace: 0;
+			border-collapse: collapse;
 		}
 
-		table,
-		tr,
-		td {
+		tr {
 			border-collapse: collapse;
         }
 
@@ -66,6 +61,11 @@
 			margin-top: 0 !important;
         }
 
+		a,
+		a[x-apple-data-detectors] {
+			text-decoration: none;
+		}
+
         .preview-text {
             color: transparent;
             display: none;
@@ -85,7 +85,6 @@
         }
 
         .template__container {
-            width: <?php echo sanitize_text_field( $container_width ); ?>;
 			margin: 0 auto;
             border-collapse: collapse;
         }
@@ -94,83 +93,33 @@
         .component {
             border-collapse: collapse;
             width: 100%;
-        }
+		}
 
-        .components__header .heading {
-            padding: 30px 35px;
-            background-color: <?php echo sanitize_hex_color( $header_bg ); ?>;
-            font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
-            border-radius: 5px;
-        }
-
-        .components__header .content p,
-        .components__header .content div {
-            font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
-        }
-
-        .components__header .heading a,
-        .components__header .heading a[x-apple-data-detectors] {
-            color: <?php echo sanitize_hex_color( $header_link_color ); ?>;
-            text-decoration: none;
+		.styling-table {
+			white-space: normal;
+			border-collapse: collapse;
+			width: 100%;
         }
 
         .components__header .heading__left {
             display: inline-table;
             vertical-align: top;
             float: left;
-            width: <?php echo sanitize_text_field( $header_left_width ); ?>;
         }
 
-        .heading__left-title img {
+        .heading__left-title .logo {
             vertical-align: top;
             max-width: 100%;
             width: 110px;
         }
 
-        .heading__right-title {
-            padding-top: 3px;
-            padding-right: 20px;
-        }
-
         .hero-image {
             vertical-align: top;
             max-width: 100%;
-            width: <?php echo sanitize_text_field( $container_width ); ?>;
         }
 
         .card-spacing {
-            height: <?php echo sanitize_text_field( $row_spacing ); ?>;
-        }
-
-        .components__content {
-            background-color: <?php echo sanitize_hex_color( $content_bg ); ?>;
-            font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
-            border-radius: 5px;
-        }
-
-        .components__content p,
-        .components__content div{
-            font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
-        }
-
-        .components__content .content {
-            padding: 30px 35px;
-        }
-
-        .components__content .hero-section p {
-            padding: 20px 35px;
-        }
-
-        .components__content .hero-section a,
-        .components__content .hero-section [x-apple-data-detectors],
-        .components__content .content a,
-        .components__content .content a[x-apple-data-detectors] {
-            color: <?php echo sanitize_hex_color( $content_link_color ); ?>;
-            text-decoration: none;
+            font-size: 0px;
         }
 
         .components__content .hero-section i {
@@ -181,94 +130,97 @@
 
 		.gmail-fix {
 			display: none !important;
+			white-space: nowrap;
+			font: 15px courier;
+			line-height: 0;
 		}
 
-		.sm-right {
-			text-align: right;
-			margin-left: auto;
+		/*** Customizations */
+		body {
+			background-color: <?php echo sanitize_hex_color( $bg_color ); ?>;
+
+			<?php if ( ! empty( $bg_image ) || is_customize_preview() ) : ?>
+			background-image: url('<?php echo esc_url( $bg_image ); ?>');
+			background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+			<?php endif; ?>
+
 		}
 
-		.sm-center {
-			text-align: center;
+		.template__container,
+		.hero-image {
+			width: <?php echo sanitize_text_field( $container_width ); ?>;
 		}
 
-		.sm-padding-left-30 {
-			padding-left: 30px;
+		.components__header .heading__left {
+			width: <?php echo sanitize_text_field( $header_left_width ); ?>;
 		}
 
-		.sm-padding-right-20 {
-			padding-right: 20px;
+		.card-spacing {
+			height: <?php echo sanitize_text_field( $row_spacing ); ?>;
 		}
 
-		.post-col-left {
-			padding-right: 10px;
+		.components__header .components__inner {
+			background-color: <?php echo sanitize_hex_color( $header_bg ); ?>;
+            font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
 		}
 
-		.post-col-right {
-			padding-left: 10px;
+		.components__header p,
+		.components__header div {
+			font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
 		}
 
-		.sm-col-25 {
-			width: 25%;
+		.components__header a,
+		.components__header a[x-apple-data-detectors] {
+			font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $header_link_color ); ?>;
 		}
 
-		.sm-col-33 {
-			width: 33%;
+		.components__content .components__inner {
+			background-color: <?php echo sanitize_hex_color( $content_bg ); ?>;
+            font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
 		}
 
-		.sm-col-50 {
-			width: 50%;
+		.components__content p,
+		.components__content div {
+			font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
 		}
 
-		@media screen and (max-width:620px) {
-			table.template-container {
-				width: 320px !important;
-				margin: 0 auto;
-				white-space: normal;
-			}
-
-			.xs-col {
-				width: 100% !important;
-			}
-
-			.xs-spacing {
-				margin: 10px 0 !important;
-			}
-
-			.xs-mb-10 {
-				margin-bottom: 10px;
-			}
-
-			.xs-mb-20 {
-				margin-bottom: 20px;
-			}
-
-			.xs-center {
-				text-align: center;
-			}
-
-			.xs-table-center {
-				text-align: center;
-				margin: 0 auto;
-			}
-
-			.sm-padding-left-30 {
-				padding-left: 0;
-			}
-
-			.sm-padding-right-20 {
-				padding-right: 0;
-			}
-
-			.post-col-left {
-				padding-right: 0;
-			}
-
-			.post-col-right {
-				padding-left: 0;
-			}
+		.components__content a,
+		.components__content a[x-apple-data-detectors] {
+			font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $content_link_color ); ?>;
 		}
+
+		.components__footer .components__inner {
+			background-color: <?php echo sanitize_hex_color( $footer_bg ); ?>;
+            font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $footer_text_color ); ?>;
+		}
+
+		.components__footer p,
+		.components__footer div {
+			font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $footer_text_color ); ?>;
+		}
+
+		.components__footer a,
+		.components__footer a[x-apple-data-detectors] {
+			font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
+            color: <?php echo sanitize_hex_color( $footer_link_color ); ?>;
+		}
+
 	</style>
+
+	<style id="email-customizer-preview-custom-css">
+		<?php echo $additional_css; ?>
+	</style>
+
 	<!--[if gte mso 9]>
 	<style type="text/css">
 		.pc-font {
@@ -282,7 +234,7 @@
 </head>
 <!--[if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]-->
 
-<body>
+<body class="email-body">
     <span class="preview-text"><?php echo wp_kses_post( $preview_text ); ?></span>
     <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" role="presentation" class="template__body">
         <tbody>

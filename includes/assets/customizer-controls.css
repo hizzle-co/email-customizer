@@ -1,0 +1,4 @@
+#customize-control-email_customizer_custom_css textarea,
+#customize-control-email_customizer_custom_css .CodeMirror {
+    height: calc(100vh - 185px);
+}

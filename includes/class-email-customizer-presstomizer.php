@@ -70,14 +70,16 @@ class Email_Customizer_Presstomizer {
 		// Load our own template.
 		add_action( 'template_redirect', array( $this, 'maybe_display_frontend' ) );
 
-		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'customize_preview_init', array( $this, 'enqueue_template_scripts' ), 99 );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customizer_controls_scripts' ) );
+		add_action( 'customize_preview_init', array( $this, 'customizer_preview_scripts' ) );
 
 		add_action( 'wp_head', array( $this, 'remove_all_header_actions' ), -1000 );
 		add_action( 'wp_head', array( $this, 'remove_external_scripts' ), 7 ); // wp_print_styles loaded at 8
 
 		add_action( 'wp_footer', array( $this, 'remove_all_footer_actions' ), -1000 );
 		add_action( 'wp_footer', array( $this, 'remove_external_scripts' ), 19 ); // wp_print_footer_scripts loaded at 20
+
+		do_action( "presstomizer_{$this->id}_set_up_custom_customizer" );
 	}
 
 	/**
@@ -177,7 +179,7 @@ class Email_Customizer_Presstomizer {
 	 */
 	public function maybe_display_frontend() {
 
-		if ( is_customize_preview() ) {
+		if ( is_customize_preview() && empty( $_POST['wp_customize_render_partials'] ) ) {
 			$this->display_frontend();
 			exit;
 		}
@@ -187,7 +189,7 @@ class Email_Customizer_Presstomizer {
 	/**
 	 * Displays our page on the frontend.
 	 *
-	 * Ensure you call `do_action( "presstomizer_{$this->id}_footer" )` if "is_customize_preview()" returns true.
+	 * Ensure you call `do_action( 'wp_head' )` && `do_action( 'wp_footer' )` if "is_customize_preview()" returns true.
 	 */
 	public function display_frontend() {
 		do_action( "presstomizer_frontend_display_{$this->id}" );
@@ -236,7 +238,7 @@ class Email_Customizer_Presstomizer {
 	 * @return bool
 	 */
 	public function is_built_in( $handle ) {
-		return strpos( $handle, 'wp-' ) === 0 || strpos( $handle, 'customize-' ) === 0;
+		return strpos( $handle, 'wp' ) === 0 || strpos( $handle, 'customize-' ) === 0 || strpos( $handle, $this->id ) === 0;
 	}
 
 	/**
@@ -245,6 +247,7 @@ class Email_Customizer_Presstomizer {
 	 * @return array
 	 */
 	public function get_allowed_scripts() {
+
 		return apply_filters(
 			"presstomizer_{$this->id}_allowed_scripts",
 			array(
@@ -254,7 +257,8 @@ class Email_Customizer_Presstomizer {
 				'customize-preview',
 				'customize-controls',
 				'query-monitor',
-				'dashicons-css'
+				'dashicons-css',
+				$this->id
 			)
 		);
 	}
@@ -353,6 +357,7 @@ class Email_Customizer_Presstomizer {
 			'wp_print_styles',
 			'wp_generator',
 			'wp_site_icon',
+			'wp_no_robots',
 			array( $this, 'remove_external_scripts' )
 		);
 
@@ -390,8 +395,8 @@ class Email_Customizer_Presstomizer {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_scripts() {
-		do_action( "presstomizer_{$this->id}_enqueue_scripts" );
+	public function customizer_controls_scripts() {
+		do_action( "presstomizer_{$this->id}_enqueue_controls_scripts" );
 	}
 
 	/**
@@ -399,8 +404,8 @@ class Email_Customizer_Presstomizer {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_template_scripts(){
-		do_action( "presstomizer_{$this->id}_enqueue_template_scripts" );
+	public function customizer_preview_scripts() {
+		do_action( "presstomizer_{$this->id}_enqueue_preview_scripts" );
 	}
 
 }

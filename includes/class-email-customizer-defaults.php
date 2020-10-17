@@ -30,10 +30,7 @@ class Email_Customizer_Defaults {
 	 */
 	public static function footer_1(){
 
-		return sprintf(
-			"&copy;{{YEAR}} %s",
-			sanitize_text_field( get_option( 'blogname' ) )
-		);
+		return "&copy;{{YEAR}} {{BLOG_NAME}}";
 
 	}
 
@@ -62,7 +59,7 @@ class Email_Customizer_Defaults {
 	 * First Header Text;
 	 */
 	public static function header_1(){
-		return sanitize_text_field( get_option( 'blogname' ) );
+		return '{{BLOG_NAME}}';
 	}
 
 	/**
@@ -167,7 +164,7 @@ class Email_Customizer_Defaults {
 	 * Footer font size.
 	 */
 	public static function footer_font_size(){
-		return '14px';
+		return '13px';
 	}
 
 	/**
@@ -188,14 +185,37 @@ class Email_Customizer_Defaults {
 	 * Footer link color.
 	 */
 	public static function footer_link_color(){
-		return '#222222';
+		return '#aaaaaa';
 	}
 
 	/**
 	 * Additional CSS
 	 */
 	public static function additional_css(){
-		return '';
+		return 
+'.components__inner {
+	border-radius: 5px;
+	text-align: left
+}
+
+.hero-section p,
+.components__footer .components__inner,
+.components__header .components__inner,
+.content {
+	padding: 30px 35px;
+}
+
+.hero-section p {
+	padding: 5px 35px;
+    margin: 0;
+}
+
+.components__inner .footer-1,
+.components__inner .footer-2 {
+	text-align: center;
+	font-weight: 400;
+}
+';
 	}
 
 	/**

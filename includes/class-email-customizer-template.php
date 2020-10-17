@@ -19,7 +19,7 @@ class Email_Customizer_Template {
 
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @param array $args Template args.
 	 */
 	public function __construct( $args ) {
@@ -58,7 +58,8 @@ class Email_Customizer_Template {
 		);
 
 		$this->args = wp_parse_args( $args, $defaults );
-		$this->args = apply_filters( 'email_customizer_args', $this->args );
+		$this->args = apply_filters( 'email_customizer_template_args', $this->args );
+		$this->args = $this->prepare_args( $this->args );
 	}
 
 	/**
@@ -69,7 +70,7 @@ class Email_Customizer_Template {
 
 		extract( $this->args );
 
-		$path = plugin_dir_path( __FILE__ ) . 'template/';
+		$path = apply_filters( 'email_customizer_template_path', plugin_dir_path( __FILE__ ) . 'template/' );
 		require_once $path . 'header.php';
 		require_once $path . 'heading.php';
 		require_once $path . 'content.php';
@@ -77,7 +78,7 @@ class Email_Customizer_Template {
 		require_once $path . 'footer.php';
 
 	}
-	
+
 	/**
 	 * Retrieves the template's html
 	 *
@@ -86,6 +87,49 @@ class Email_Customizer_Template {
 		ob_start();
 		$this->render();
 		return ob_get_clean();
+	}
+
+	/**
+	 * Prepares the template args.
+	 *
+	 * @return array $args An array of args to prepare.
+	 */
+	public static function prepare_args( $args ) {
+
+		foreach ( array( 'footer_2', 'footer_1', 'header_2', 'header_1','before_content' ) as $key ) {
+			$args[ $key ] = wp_kses_post( self::parse_tags( $args[ $key ] ) ) . "&nbsp;";
+		}
+
+		return $args;
+	}
+
+	/**
+	 * parses the tags in a heading.
+	 *
+	 * @return string $string The string to parse.
+	 */
+	public static function parse_tags( $string ) {
+
+		// Prepare merge tags.
+		$blog_url = 'page' === get_option( 'show_on_front' ) ? get_permalink( get_option( 'page_for_posts' ) ) : get_home_url();
+		$tags     = array(
+			'{{BLOG_URL}}'         => esc_url_raw( $blog_url ),
+			'{{HOME_URL}}'         => esc_url_raw( get_home_url() ),
+			'{{ADMIN_EMAIL}}'      => sanitize_email( get_bloginfo( 'admin_email', 'display' ) ),
+			'{{BLOG_NAME}}'        => get_bloginfo( 'name', 'display' ),
+			'{{BLOG_DESCRIPTION}}' => get_bloginfo( 'description', 'display' ),
+			'{{DATE}}'             => date_i18n( get_option( 'date_format' ) ),
+			'{{TIME}}'             => date_i18n( get_option( 'time_format' ) ),
+			'{{YEAR}}'             => date_i18n( 'Y' ),
+			'{{MONTH}}'            => date_i18n( 'F' ),
+			'{{DAY}}'              => date_i18n( 'F' ),
+		);
+
+		foreach ( $tags as $tag => $value ) {
+			$string = str_ireplace( $tag, $value, $string );
+		}
+
+		return $string;
 	}
 
 }

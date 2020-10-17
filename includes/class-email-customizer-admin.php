@@ -32,13 +32,13 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		add_action( 'admin_menu', array( $this, 'display_customizer_link' ) );
 
-		if ( isset( $_GET[ $this->id ] ) ) {
-			add_action( 'presstomizer_frontend_display_email_customizer_customize', array( $this, 'load_email_template' ) );
+		if ( isset( $_GET[ $this->id ] ) || $this->is_autosaving() ) {
 			add_action( 'customize_register', array( $this, 'add_general_panel' ) );
 			add_action( 'customize_register', array( $this, 'add_header_panel' ) );
 			add_action( 'customize_register', array( $this, 'add_body_panel' ) );
 			add_action( 'customize_register', array( $this, 'add_footer_panel' ) );
 			add_action( 'customize_register', array( $this, 'add_css_panel' ) );
+			add_action( 'customize_register', array( $this, 'register_partials' ) );
 		}
 
     }
@@ -63,8 +63,36 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 * Loads the email template class.
 	 */
 	public function load_email_template() {
-		$template = new Email_Customizer_Template( array() );
+		$template = new Email_Customizer_Template( get_option( 'email_customizer', array() ) );
 		$template->render();
+	}
+
+	/**
+	 * Displays our page on the frontend.
+	 *
+	 */
+	public function display_frontend() {
+		$this->load_email_template();
+	}
+
+	/**
+	 * Register custom customizer scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	public function customizer_preview_scripts() {
+		$version = filemtime( plugin_dir_path( __FILE__ ) . 'assets/customizer-preview.js' );
+		wp_enqueue_script( 'email_customizer_customize', plugin_dir_url( __FILE__ ) . 'assets/customizer-preview.js', array( 'jquery' ), $version, true );
+	}
+
+	/**
+	 * Register custom customizer scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	public function customizer_controls_scripts() {
+		$version = filemtime( plugin_dir_path( __FILE__ ) . 'assets/customizer-controls.css' );
+		wp_enqueue_style( 'email_customizer_customize', plugin_dir_url( __FILE__ ) . 'assets/customizer-controls.css', array(), $version );
 	}
 
 	/**
@@ -103,6 +131,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				)
 			)
 		);
+
 	}
 
 	/**
@@ -146,6 +175,46 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	}
 
 	/**
+	 * Helper function to add a text input control.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Customizer instance
+	 * @param string $setting_id The setting id
+	 * @param string $label The control label
+	 * @param string $section The section id
+	 * @param string $default_value The default value
+	 *
+	 */
+	public function add_text( $wp_customize, $setting_id, $label, $section, $default_value = '' ) {
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'type'                  => 'option',
+				'default'               => $default_value,
+				'transport'             => 'postMessage',
+				'capability'            => 'edit_theme_options',
+				'sanitize_callback'     => 'sanitize_text_field',
+				'sanitize_js_callback'  => '',
+			)
+		);
+
+		$this->add_control(
+			$wp_customize,
+			new WP_Customize_Control(
+				$wp_customize,
+				sanitize_key( $setting_id ),
+				array(
+					'label'         => $label,
+					'type'          => 'text',
+					'section'       => $section,
+					'settings'      => $setting_id,
+				)
+			)
+		);
+
+	}
+
+	/**
 	 * Helper function to add an image control.
 	 *
 	 * @param WP_Customize_Manager $wp_customize Customizer instance
@@ -162,16 +231,16 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			array(
 				'type'                  => 'option',
 				'default'               => $default_value,
-				'transport'             => 'refresh',
+				'transport'             => 'postMessage',
 				'capability'            => 'edit_theme_options',
 				'sanitize_callback'     => array( $this, 'sanitize_image' ),
 				'sanitize_js_callback'  => '',
 			)
 		);
-
+		
 		$this->add_control(
 			$wp_customize,
-			new WP_Customize_Cropped_Image_Control(
+			new WP_Customize_Image_Control(
 				$wp_customize,
 				sanitize_key( $setting_id ),
 				array(
@@ -179,10 +248,6 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 					'section'     => $section,
 					'settings'    => $setting_id,
 					'mime_type'   => 'image',
-					'flex_width'  => true,
-					'flex_height' => true,
-					'height'      => 150,
-					'width'       => 300,
 				)
 			)
 		);
@@ -267,8 +332,8 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[custom_css]',
 			array(
 				'type'                  => 'option',
-				'default'               => '',
-				'transport'             => 'refresh',
+				'default'               => Email_Customizer_Defaults::additional_css(),
+				'transport'             => 'postMessage',
 				'capability'            => 'edit_theme_options',
 				'sanitize_callback'     => '',
 				'sanitize_js_callback'  => '',
@@ -291,11 +356,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				)
 			)
 		);
-// #customize-control-email_customizer_custom_css .customize-control-code_editor textarea
-// #customize-control-email_customizer_custom_css .customize-control-code_editor .CodeMirror
-// height: 500px; :last-child .CodeMirror {
-//    height: calc(100vh - 185px);
-//}
+
 	}
 
 	/**
@@ -314,85 +375,31 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			)
 		);
 
-		// Container Width
-		$wp_customize->add_setting(
-			'email_customizer[width]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::container_width(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
-		);
-
-		$this->add_control(
+		// Container Width.
+		$this->add_text(
 			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_width',
-				array(
-					'label'         => __( 'Container Width', 'email-templates' ),
-					'type'          => 'text',
-					'section'       => 'email_customizer_general',
-					'settings'      => 'email_customizer[width]',
-				)
-			)
+			'email_customizer[width]',
+			__( 'Container Width', 'email-templates' ),
+			'email_customizer_general',
+			Email_Customizer_Defaults::container_width()
 		);
 
 		// Container Width.
-		$wp_customize->add_setting(
+		$this->add_text(
+			$wp_customize,
 			'email_customizer[header_left_width]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::header_left_width(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
+			__( 'Left Header Width', 'email-templates' ),
+			'email_customizer_general',
+			Email_Customizer_Defaults::header_left_width()
 		);
 
-		$this->add_control(
+		// Spacing Height.
+		$this->add_text(
 			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_header_left_width',
-				array(
-					'label'         => __( 'Left Header Width', 'email-templates' ),
-					'type'          => 'text', 
-					'section'       => 'email_customizer_general',
-					'settings'      => 'email_customizer[header_left_width]',
-				)
-			)
-		);
-
-		// Spacing Width
-		$wp_customize->add_setting(
 			'email_customizer[spacing]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::row_spacing(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
-		);
-
-		$this->add_control(
-			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_spacing',
-				array(
-					'label'         => __( 'Section Spacing', 'email-templates' ),
-					'type'          => 'text',
-					'section'       => 'email_customizer_general',
-					'settings'      => 'email_customizer[spacing]',
-				)
-			)
+			__( 'Section Spacing', 'email-templates' ),
+			'email_customizer_general',
+			Email_Customizer_Defaults::row_spacing()
 		);
 
 		// Background Image.
@@ -437,7 +444,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[logo]',
 			__( 'Logo', 'email-customizer' ),
 			'email_customizer_header',
-			Email_Customizer_Defaults::logo(),
+			Email_Customizer_Defaults::logo()
 		);
 
 		// Header text.  - Text on the left.
@@ -446,15 +453,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[header_text_left]',
 			__( 'Header Text 1', 'email-templates' ),
 			'email_customizer_header',
-			Email_Customizer_Defaults::header_1(),
-		);
-
-		$wp_customize->selective_refresh->add_partial(
-			'email_customizer[header_text_left]',
-			array(
-				'selector'        => '.heading__left-title-div',
-				'render_callback' => array( $this, 'left_title' ),
-			)
+			Email_Customizer_Defaults::header_1()
 		);
 
 		// Header text.  - Text on the right.
@@ -463,34 +462,16 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[header_text_right]',
 			__( 'Header Text 2', 'email-templates' ),
 			'email_customizer_header',
-			Email_Customizer_Defaults::header_2(),
+			Email_Customizer_Defaults::header_2()
 		);
 
 		// Text Size.
-		$wp_customize->add_setting(
-			'email_customizer[header_size]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::header_font_size(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
-		);
-
-		$this->add_control(
+		$this->add_text(
 			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_header_size',
-				array(
-					'label'         => __( 'Font Size', 'email-templates' ),
-					'type'          => 'text',
-					'section'       => 'email_customizer_header',
-					'settings'      => 'email_customizer[header_size]',
-				)
-			)
+			'email_customizer[header_size]',
+			__( 'Font Size', 'email-templates' ),
+			'email_customizer_header',
+			Email_Customizer_Defaults::header_font_size()
 		);
 
 		// Background Color.
@@ -538,7 +519,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			)
 		);
 
-		// Header text.  - Text on the right.
+		// Header text.
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[before_content]',
@@ -548,30 +529,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		);
 
 		// Text Size.
-		$wp_customize->add_setting(
-			'email_customizer[content_size]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::content_font_size(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
-		);
-
-		$this->add_control(
+		$this->add_text(
 			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_content_size',
-				array(
-					'label'         => __( 'Font Size', 'email-templates' ),
-					'type'          => 'text',
-					'section'       => 'email_customizer_content',
-					'settings'      => 'email_customizer[content_size]',
-				)
-			)
+			'email_customizer[content_size]',
+			__( 'Font Size', 'email-templates' ),
+			'email_customizer_content',
+			Email_Customizer_Defaults::content_font_size()
 		);
 
 		// Background Color.
@@ -638,30 +601,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		);
 
 		// Text Size.
-		$wp_customize->add_setting(
-			'email_customizer[footer_size]',
-			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::footer_font_size(),
-				'transport'             => 'refresh',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
-			)
-		);
-
-		$this->add_control(
+		$this->add_text(
 			$wp_customize,
-			new WP_Customize_Control(
-				$wp_customize,
-				'email_customizer_footer_size',
-				array(
-					'label'         => __( 'Font Size', 'email-templates' ),
-					'type'          => 'text',
-					'section'       => 'email_customizer_footer',
-					'settings'      => 'email_customizer[footer_size]',
-				)
-			)
+			'email_customizer[footer_size]',
+			__( 'Font Size', 'email-templates' ),
+			'email_customizer_footer',
+			Email_Customizer_Defaults::footer_font_size()
 		);
 
 		// Background Color.
@@ -693,4 +638,114 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 	}
 
+	/**
+	 * Renders a refresh partial.
+	 *
+	 * @param WP_Customize_Partial $partial
+	 */
+	public function render_partial( $partial ) {
+
+		$customized = json_decode( wp_unslash( $_POST['customized'] ), true );
+		
+		if ( empty( $customized ) || ! isset( $customized[ $partial->id ] ) ) {
+			return "&nbsp;";
+		}
+
+		$value = Email_Customizer_Template::parse_tags( $customized[ $partial->id ] );
+		return wp_kses_post( $value ) . "&nbsp;";
+	}
+
+	/**
+	 * Registers refresh partials.
+	 *
+	 * @param WP_Customize_Manager $wp_customize
+	 */
+	public function register_partials( $wp_customize ) {
+
+		// Left header text.
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[header_text_left]',
+			array(
+				'selector'        => '.heading__left-title-text',
+				'render_callback' => array( $this, 'render_partial' ),
+			)
+		);
+
+		// Right header text.
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[header_text_right]',
+			array(
+				'selector'        => '.heading__right-title',
+				'render_callback' => array( $this, 'render_partial' ),
+			)
+		);
+
+		// Before content text.
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[before_content]',
+			array(
+				'selector'        => '.hero-section',
+				'render_callback' => array( $this, 'render_partial' ),
+			)
+		);
+
+		// Footer 1 text.
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[footer_text_left]',
+			array(
+				'selector'        => '.footer-1',
+				'render_callback' => array( $this, 'render_partial' ),
+			)
+		);
+
+		// Footer 2 text.
+		$wp_customize->selective_refresh->add_partial(
+			'email_customizer[footer_text_right]',
+			array(
+				'selector'        => '.footer-2',
+				'render_callback' => array( $this, 'render_partial' ),
+			)
+		);
+
+	}
+
+	/**
+	 * Returns template options.
+	 *
+	 * @return array An array of options.
+	 */
+	public function get_options() {
+		$options = get_option( 'email_customizer' );
+		return is_array( $options ) ? $options : array();
+	}
+
+	/**
+	 * Returns a single template option.
+	 *
+	 * @return string The option value.
+	 */
+	public function get_option( $option, $default = '' ) {
+		$options = $this->get_options( 'email_customizer' );
+		return isset( $options[$option] ) ? $options[$option] : $default;
+	}
+
+	/**
+	 * Checks if we're autosaving our instance.
+	 *
+	 */
+	public function is_autosaving() {
+
+		if ( empty( $_POST['customize_changeset_data'] ) ) {
+			return false;
+		}
+		return strpos( $_POST['customize_changeset_data'], 'email_customizer' ) !== false;
+
+	}
+
 }
+// Remove bg image not updating.
+// Fix color pickers.
+// Text Emails.
+// Filter Emails.
+// Saving Options.
+// Template switcher.

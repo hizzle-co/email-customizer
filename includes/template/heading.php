@@ -1,18 +1,19 @@
+<!-- START COMPONENT: HEADER -->
 <tbody class="components__item components__header">
 	<tr>
 		<td>
 		    <table cellspacing="0" cellpadding="0" border="0" role="presentation" class="component">
 				<tr>
-					<td class="heading">
+					<td class="components__inner">
 
 						<!--[if (gte mso 9)|(IE)]><table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation"><tr><td width="<?php echo esc_attr( $header_left_width ); ?>" valign="middle"><![endif]-->
-						<table cellpadding="0" cellspacing="0" border="0" role="presentation" class="sm-col xs-col xs-center xs-mb-20 heading__left">
+						<table cellpadding="0" cellspacing="0" border="0" role="presentation" class="heading__left">
 							<tbody>
 								<tr>
-                                    <td align="" class="heading__left-title">
+                                    <td class="heading__left-title">
 
                                         <div class="heading__left-title-div">
-                                            <?php if ( ! empty( $logo ) ) : ?>
+                                            <?php if ( ! empty( $logo ) || is_customize_preview() ) : ?>
                                                 <a href="<?php echo esc_url( home_url() ); ?>">
 
                                                     <!--[if gte mso 9]>
@@ -20,13 +21,16 @@
                                                     <![endif]-->
 
                                                     <!--[if !gte mso 9]><!-->
-                                                        <img width="110" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
+                                                        <img class="logo" style="<?php echo empty( $logo ) ? 'display:none' : ''; ?>" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
                                                     <!--<![endif]-->
                                                 </a>
                                             <?php endif; ?>
 
-                                            &nbsp;
-                                            <?php echo wp_kses_post( $header_1 ); ?>
+											&nbsp;
+											<span class="heading__left-title-text">
+												<?php echo wp_kses_post( $header_1 ); ?>
+											</span>
+
                                         </div>
 
                                     </td>
@@ -36,10 +40,10 @@
 
 
 						<!--[if (gte mso 9)|(IE)]></td><td width="0" valign="middle"><![endif]-->
-						<table cellpadding="0" cellspacing="0" border="0" role="presentation" class="wrapper sm-col xs-col xs-center heading__right" style="margin: 0px;">
+						<table cellpadding="0" cellspacing="0" border="0" role="presentation" class="heading__right" style="margin: 0px;">
 							<tbody>
 								<tr>
-								    <td align="center">
+								    <td align="right">
 										<table cellpadding="0" cellspacing="0" border="0" role="presentation" class="wrapper">
 											<tbody>
 												<tr>
@@ -58,12 +62,13 @@
 
 					</td>
 				</tr>
-			</table><!-- END COMPONENT -->
+			</table>
 		</td>
     </tr>
 
-	<tr class="card-spacing" style="font-size: 0px;">
+	<tr class="card-spacing">
 		&nbsp;
     </tr>
 
 </tbody>
+<!-- END COMPONENT -->

@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function email_customizer_fail_php_version() {
 	/* translators: %s: PHP version */
-	$message = sprintf( esc_html__( 'Email Customizer requires PHP version %s+, plugin is currently NOT RUNNING.', 'email-customizer' ), '5.6' );
+	$message      = sprintf( esc_html__( 'Email Customizer requires PHP version %s+, plugin is currently NOT RUNNING.', 'email-customizer' ), '5.6' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }
@@ -53,7 +53,7 @@ function email_customizer_fail_php_version() {
  */
 function email_customizer_fail_wp_version() {
 	/* translators: %s: WordPress version */
-	$message = sprintf( esc_html__( 'Email Customizer requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'email-customizer' ), '4.7' );
+	$message      = sprintf( esc_html__( 'Email Customizer requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'email-customizer' ), '4.7' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }
@@ -80,7 +80,6 @@ function email_customizer_load_plugin_textdomain() {
 add_action( 'plugins_loaded', 'email_customizer_load_plugin_textdomain' );
 
 
-
 // Ensure that this environment is supported then load our plugin.
 if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
 	add_action( 'admin_notices', 'email_customizer_fail_php_version' );
@@ -90,6 +89,3 @@ if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
     require plugin_dir_path( __FILE__ ) . 'includes/class-email-customizer.php';
     new Email_Customizer();
 }
-
-// Show both logo and text in the header.
-// Text can be filtered, for example, in case of WooCommerce etc.
