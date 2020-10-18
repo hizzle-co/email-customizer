@@ -22,7 +22,11 @@
             mso-line-height-rule: exactly;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
-            font-family: Arial, Helvetica, sans-serif;
+			font-family: Arial, Helvetica, sans-serif;
+
+			<?php if ( is_customize_preview() ) : ?>
+				min-height: 100vh;
+			<?php endif; ?>
 		}
 
         table,
