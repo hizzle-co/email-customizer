@@ -2,3 +2,7 @@
 #customize-control-email_customizer_custom_css .CodeMirror {
     height: calc(100vh - 185px);
 }
+
+.customize-control-color .iris-square {
+	margin-right: 0px !important;
+}

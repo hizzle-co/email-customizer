@@ -23,10 +23,10 @@
                                                     <!--[if !gte mso 9]><!-->
                                                         <img class="logo" style="<?php echo empty( $logo ) ? 'display:none' : ''; ?>" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
                                                     <!--<![endif]-->
-                                                </a>
+												</a>
+												&nbsp;
                                             <?php endif; ?>
 
-											&nbsp;
 											<span class="heading__left-title-text">
 												<?php echo wp_kses_post( $header_1 ); ?>
 											</span>

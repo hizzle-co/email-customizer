@@ -35,6 +35,19 @@ class Email_Customizer_Defaults {
 	}
 
 	/**
+	 * First Footer Text on the flat template;
+	 */
+	public static function flat_footer_1(){
+
+		return sprintf(
+			__( 'This email was sent from %1$s on %2$s', 'email-customizer' ),
+			'<a href="{{BLOG_URL}}">{{BLOG_NAME}}</a>',
+			'{{DATE}}'
+		);
+
+	}
+
+	/**
 	 * Second header text;
 	 */
 	public static function header_2(){
@@ -80,7 +93,7 @@ class Email_Customizer_Defaults {
 	 * Row Spacing;
 	 */
 	public static function row_spacing(){
-		return '0px';
+		return '20px';
 	}
 
 	/**
@@ -194,7 +207,7 @@ class Email_Customizer_Defaults {
 	public static function additional_css(){
 		return 
 '.components__inner {
-	border-radius: 5px;
+	border-radius: 0px;
 	text-align: left
 }
 
@@ -214,6 +227,40 @@ class Email_Customizer_Defaults {
 .components__inner .footer-2 {
 	text-align: center;
 	font-weight: 400;
+}
+';
+	}
+
+	/**
+	 * Additional CSS for the flat template.
+	 */
+	public static function flat_template_additional_css() {
+		return 
+'.components__inner {
+	border-radius: 0px;
+	text-align: left
+}
+
+.hero-section p,
+.components__footer .components__inner,
+.components__header .components__inner,
+.content {
+	padding: 30px 35px;
+}
+
+.hero-section p {
+	padding: 5px 35px;
+    margin: 0;
+}
+
+.components__inner .footer-1,
+.components__inner .footer-2 {
+	text-align: left;
+	font-weight: 400;
+}
+
+.email-body .template__container{
+	margin: 0;
 }
 ';
 	}

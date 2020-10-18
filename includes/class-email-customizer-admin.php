@@ -524,8 +524,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$wp_customize,
 			'email_customizer[before_content]',
 			__( 'Before Content', 'email-templates' ),
-			'email_customizer_content',
-			Email_Customizer_Defaults::before_content(),
+			'email_customizer_content'
 		);
 
 		// Text Size.
@@ -652,7 +651,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		}
 
 		$value = Email_Customizer_Template::parse_tags( $customized[ $partial->id ] );
-		return wp_kses_post( $value ) . "&nbsp;";
+		return empty( $value ) ? "&nbsp;" : wp_kses_post( $value );
 	}
 
 	/**
@@ -744,8 +743,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 }
 
-// Fix color pickers.
-// Text Emails.
+// Test Emails.
 // Filter Emails.
 // Saving Options.
 // Template switcher.

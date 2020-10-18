@@ -105,6 +105,16 @@
 			width: 100%;
         }
 
+		.components__header h1,
+		.components__header h2,
+		.components__header h3,
+		.components__header h4,
+		.components__header h5,
+		.components__header h6 {
+			margin: 0;
+			display: inline-block;
+		}
+
         .components__header .heading__left {
             display: inline-table;
             vertical-align: top;
