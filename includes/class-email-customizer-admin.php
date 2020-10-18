@@ -743,7 +743,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	}
 
 }
-// Remove bg image not updating.
+
 // Fix color pickers.
 // Text Emails.
 // Filter Emails.

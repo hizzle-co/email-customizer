@@ -23,6 +23,7 @@ function email_customizer_css( control, css_property, selector, unit ) {
 			// Remove <style> first!
 			control = control.replace( '[', '-' );
 			control = control.replace( ']', '' );
+			jQuery( 'style#' + control + '-' + css_property ).remove();
 
 			if ( new_value ) {
 
@@ -41,9 +42,6 @@ function email_customizer_css( control, css_property, selector, unit ) {
 					}
 				}
 
-				// Remove old.
-				jQuery( 'style#' + control + '-' + css_property ).remove();
-
 				// Concat and append new <style>.
 				jQuery( 'head' ).append(
 					'<style id="' + control + '-' + css_property + '">'
@@ -51,9 +49,6 @@ function email_customizer_css( control, css_property, selector, unit ) {
 					+ '</style>'
 				);
 
-			} else {
-				// Remove old.
-				jQuery( 'style#' + control ).remove();
 			}
 
 		} );
