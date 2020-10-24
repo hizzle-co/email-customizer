@@ -6,3 +6,41 @@
 .customize-control-color .iris-square {
 	margin-right: 0px !important;
 }
+
+#publish-settings {
+	display: none !important;
+}
+
+#customize-save-button-wrapper .save {
+	border-radius: 3px !important;
+}
+
+.email-customizer-change-theme-button {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+}
+
+.email-customizer-change-theme-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 990000;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    overflow: auto;
+}
+
+.email-customizer-change-theme-popup-show {
+    display: flex;
+}
+
+.email-customizer-popup-close {
+    position: fixed;
+    top: 10px;
+    right: 60px;
+}

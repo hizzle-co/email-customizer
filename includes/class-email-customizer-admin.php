@@ -63,6 +63,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 * Loads the email template class.
 	 */
 	public function load_email_template() {
+		// noptin_dump( get_option( 'email_customizer', array() ) );exit;
 		$template = new Email_Customizer_Template( get_option( 'email_customizer', array() ) );
 		$template->render();
 	}
@@ -93,6 +94,19 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	public function customizer_controls_scripts() {
 		$version = filemtime( plugin_dir_path( __FILE__ ) . 'assets/customizer-controls.css' );
 		wp_enqueue_style( 'email_customizer_customize', plugin_dir_url( __FILE__ ) . 'assets/customizer-controls.css', array(), $version );
+
+		$version = filemtime( plugin_dir_path( __FILE__ ) . 'assets/customizer-controls.js' );
+		wp_enqueue_script( 'email_customizer_customize_controls', plugin_dir_url( __FILE__ ) . 'assets/customizer-controls.js', array( 'jquery' ), $version, true );
+
+		wp_localize_script(
+			'email_customizer_customize_controls',
+			'email_customizer_i10n',
+			array(
+				'changeTheme' => __( 'Change Template', 'email-customizer' ),
+				'close'       => __( 'Close', 'email-customizer' ),
+			)
+		);
+
 	}
 
 	/**
@@ -378,7 +392,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Container Width.
 		$this->add_text(
 			$wp_customize,
-			'email_customizer[width]',
+			'email_customizer[container_width]',
 			__( 'Container Width', 'email-templates' ),
 			'email_customizer_general',
 			Email_Customizer_Defaults::container_width()
@@ -450,7 +464,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Header text.  - Text on the left.
 		$this->add_code(
 			$wp_customize,
-			'email_customizer[header_text_left]',
+			'email_customizer[header_1]',
 			__( 'Header Text 1', 'email-templates' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_1()
@@ -459,7 +473,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Header text.  - Text on the right.
 		$this->add_code(
 			$wp_customize,
-			'email_customizer[header_text_right]',
+			'email_customizer[header_2]',
 			__( 'Header Text 2', 'email-templates' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_2()
@@ -468,7 +482,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Size.
 		$this->add_text(
 			$wp_customize,
-			'email_customizer[header_size]',
+			'email_customizer[header_font_size]',
 			__( 'Font Size', 'email-templates' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_font_size()
@@ -477,7 +491,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Background Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[header_bg_color]',
+			'email_customizer[header_bg]',
 			__( 'Background Color', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_bg()
@@ -486,7 +500,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[header_color]',
+			'email_customizer[header_text_color]',
 			__( 'Text Color', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_text_color()
@@ -530,7 +544,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Size.
 		$this->add_text(
 			$wp_customize,
-			'email_customizer[content_size]',
+			'email_customizer[content_font_size]',
 			__( 'Font Size', 'email-templates' ),
 			'email_customizer_content',
 			Email_Customizer_Defaults::content_font_size()
@@ -539,7 +553,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Background Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[content_bg_color]',
+			'email_customizer[content_bg]',
 			__( 'Background Color', 'email-customizer' ),
 			'email_customizer_content',
 			Email_Customizer_Defaults::content_bg(),
@@ -548,7 +562,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[content_color]',
+			'email_customizer[content_text_color]',
 			__( 'Text Color', 'email-customizer' ),
 			'email_customizer_content',
 			Email_Customizer_Defaults::content_text_color(),
@@ -584,7 +598,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Footer text.  - Text on the left.
 		$this->add_code(
 			$wp_customize,
-			'email_customizer[footer_text_left]',
+			'email_customizer[footer_1]',
 			__( 'Footer Text 1', 'email-templates' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_1(),
@@ -593,7 +607,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Footer text.  - Text on the right.
 		$this->add_code(
 			$wp_customize,
-			'email_customizer[footer_text_right]',
+			'email_customizer[footer_2]',
 			__( 'Footer Text 2', 'email-templates' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_2(),
@@ -602,7 +616,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Size.
 		$this->add_text(
 			$wp_customize,
-			'email_customizer[footer_size]',
+			'email_customizer[footer_font_size]',
 			__( 'Font Size', 'email-templates' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_font_size()
@@ -611,7 +625,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Background Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[footer_bg_color]',
+			'email_customizer[footer_bg]',
 			__( 'Background Color', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_bg()
@@ -620,7 +634,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		// Text Color.
 		$this->add_color(
 			$wp_customize,
-			'email_customizer[footer_color]',
+			'email_customizer[footer_text_color]',
 			__( 'Text Color', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_text_color()
@@ -663,7 +677,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		// Left header text.
 		$wp_customize->selective_refresh->add_partial(
-			'email_customizer[header_text_left]',
+			'email_customizer[header_1]',
 			array(
 				'selector'        => '.heading__left-title-text',
 				'render_callback' => array( $this, 'render_partial' ),
@@ -672,7 +686,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		// Right header text.
 		$wp_customize->selective_refresh->add_partial(
-			'email_customizer[header_text_right]',
+			'email_customizer[header_2]',
 			array(
 				'selector'        => '.heading__right-title',
 				'render_callback' => array( $this, 'render_partial' ),
@@ -690,7 +704,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		// Footer 1 text.
 		$wp_customize->selective_refresh->add_partial(
-			'email_customizer[footer_text_left]',
+			'email_customizer[footer_1]',
 			array(
 				'selector'        => '.footer-1',
 				'render_callback' => array( $this, 'render_partial' ),
@@ -699,7 +713,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		// Footer 2 text.
 		$wp_customize->selective_refresh->add_partial(
-			'email_customizer[footer_text_right]',
+			'email_customizer[footer_2]',
 			array(
 				'selector'        => '.footer-2',
 				'render_callback' => array( $this, 'render_partial' ),
@@ -734,10 +748,15 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 */
 	public function is_autosaving() {
 
-		if ( empty( $_POST['customize_changeset_data'] ) ) {
+		if ( empty( $_POST['customize_changeset_data'] ) && empty( $_POST['customized'] ) ) {
 			return false;
 		}
-		return strpos( $_POST['customize_changeset_data'], 'email_customizer' ) !== false;
+
+		if ( ! empty( $_POST['customize_changeset_data'] ) ) {
+			return strpos( $_POST['customize_changeset_data'], 'email_customizer' ) !== false;
+		}
+
+		return strpos( $_POST['customized'], 'email_customizer' ) !== false;
 
 	}
 

@@ -97,27 +97,27 @@ function email_customizer_image( control, selector ) {
 	email_customizer_css( 'email_customizer[bg_image]', 'background-image', 'body.email-body', 'url' );
 	email_customizer_css( 'email_customizer[bg_color]', 'background-color', 'body.email-body' );
 	email_customizer_text( 'email_customizer[custom_css]', '#email-customizer-preview-custom-css' );
-	email_customizer_css( 'email_customizer[width]', 'width', '.email-body .template__container, .email-body .hero-image' );
+	email_customizer_css( 'email_customizer[container_width]', 'width', '.email-body .template__container, .email-body .hero-image' );
 	email_customizer_css( 'email_customizer[header_left_width]', 'width', '.email-body .components__header .heading__left' );
 	email_customizer_css( 'email_customizer[spacing]', 'height', '.email-body .card-spacing' );
 
 	// Heading.
 	email_customizer_image( 'email_customizer[logo]', '.heading__left-title-div .logo' );
-	email_customizer_css( 'email_customizer[header_size]', 'font-size', '.email-body .components__header a, .email-body .components__header p, .email-body .components__header div, .email-body .components__header .components__inner' );
-	email_customizer_css( 'email_customizer[header_bg_color]', 'background-color', '.email-body .components__header .components__inner' );
-	email_customizer_css( 'email_customizer[header_color]', 'color', '.email-body .components__header .components__inner, .email-body .components__header p, .email-body .components__header div' );
-	email_customizer_css( 'email_customizer[header_link_color]', 'color', '.email-body .components__header .heading a' );
+	email_customizer_css( 'email_customizer[header_font_size]', 'font-size', '.email-body .components__header a, .email-body .components__header p, .email-body .components__header div, .email-body .components__header .components__inner' );
+	email_customizer_css( 'email_customizer[header_bg]', 'background-color', '.email-body .components__header .components__inner' );
+	email_customizer_css( 'email_customizer[header_text_color]', 'color', '.email-body .components__header .components__inner, .email-body .components__header p, .email-body .components__header div' );
+	email_customizer_css( 'email_customizer[header_link_color]', 'color', '.email-body .components__header a' );
 
 	// Content.
-	email_customizer_css( 'email_customizer[content_size]', 'font-size', '.email-body .components__content a, .email-body .components__content p, .email-body .components__content div, .email-body .components__content .components__inner' );
-	email_customizer_css( 'email_customizer[content_bg_color]', 'background-color', '.email-body .components__content .components__inner' );
-	email_customizer_css( 'email_customizer[content_color]', 'color', '.email-body .components__content .components__inner, .email-body .components__content p, .email-body .components__content div' );
+	email_customizer_css( 'email_customizer[content_font_size]', 'font-size', '.email-body .components__content a, .email-body .components__content p, .email-body .components__content div, .email-body .components__content .components__inner' );
+	email_customizer_css( 'email_customizer[content_bg]', 'background-color', '.email-body .components__content .components__inner' );
+	email_customizer_css( 'email_customizer[content_text_color]', 'color', '.email-body .components__content .components__inner, .email-body .components__content p, .email-body .components__content div' );
 	email_customizer_css( 'email_customizer[content_link_color]', 'color', '.email-body .components__content a' );
 
 	// Footer.
-	email_customizer_css( 'email_customizer[footer_size]', 'font-size', '.email-body .components__footer a, .email-body .components__footer p, .email-body .components__footer div, .email-body .components__footer .components__inner' );
-	email_customizer_css( 'email_customizer[footer_bg_color]', 'background-color', '.components__footer .components__inner' );
-	email_customizer_css( 'email_customizer[footer_color]', 'color', '.email-body .components__footer .components__inner, .email-body .components__footer p, .email-body .components__footer div' );
+	email_customizer_css( 'email_customizer[footer_font_size]', 'font-size', '.email-body .components__footer a, .email-body .components__footer p, .email-body .components__footer div, .email-body .components__footer .components__inner' );
+	email_customizer_css( 'email_customizer[footer_bg]', 'background-color', '.components__footer .components__inner' );
+	email_customizer_css( 'email_customizer[footer_text_color]', 'color', '.email-body .components__footer .components__inner, .email-body .components__footer p, .email-body .components__footer div' );
 	email_customizer_css( 'email_customizer[footer_link_color]', 'color', '.email-body .components__footer a' );
 
 } )( jQuery );

@@ -28,10 +28,23 @@ class Email_Customizer_Template {
 			$args =  array();
 		}
 
-		$this->args = wp_parse_args( $args, $this->hero_image_template() );
+		$this->args = array_merge( $this->default_template(), $args );
 		$this->args = apply_filters( 'email_customizer_template_args', $this->args );
 		$this->args = $this->prepare_args( $this->args );
 
+	}
+
+	/**
+	 * Prints a side by side comparison of the args.
+	 *
+	 */
+	public function debug( $args ) {
+		ksort( $args );
+		ksort( $this->args );
+		echo '<div style="display: flex">';
+		noptin_dump( $args );
+		noptin_dump( $this->args );
+		echo '</div>';
 	}
 
 	/**
@@ -120,7 +133,7 @@ class Email_Customizer_Template {
 			'header_1'           => Email_Customizer_Defaults::header_1(),
 			'container_width'    => Email_Customizer_Defaults::container_width(),
 			'header_left_width'  => Email_Customizer_Defaults::header_left_width(),
-			'row_spacing'        => Email_Customizer_Defaults::row_spacing(),
+			'spacing'            => Email_Customizer_Defaults::row_spacing(),
 			'bg_color'           => Email_Customizer_Defaults::bg_color(),
 			'bg_image'           => Email_Customizer_Defaults::bg_image(),
 			'logo'               => Email_Customizer_Defaults::logo(),
@@ -137,7 +150,7 @@ class Email_Customizer_Template {
 			'footer_bg'          => Email_Customizer_Defaults::footer_bg(),
 			'footer_text_color'  => Email_Customizer_Defaults::footer_text_color(),
 			'footer_link_color'  => Email_Customizer_Defaults::footer_link_color(),
-			'additional_css'     => Email_Customizer_Defaults::additional_css(),
+			'custom_css'         => Email_Customizer_Defaults::additional_css(),
 			'content'            => Email_Customizer_Defaults::default_content(),
 			'preview_text'       => '',
 		);
@@ -158,7 +171,7 @@ class Email_Customizer_Template {
 			'header_1'           => Email_Customizer_Defaults::header_1(),
 			'container_width'    => Email_Customizer_Defaults::container_width(),
 			'header_left_width'  => Email_Customizer_Defaults::header_left_width(),
-			'row_spacing'        => '0px',
+			'spacing'            => '0px',
 			'bg_color'           => '#ffffff',
 			'bg_image'           => '',
 			'logo'               => Email_Customizer_Defaults::logo(),
@@ -175,7 +188,7 @@ class Email_Customizer_Template {
 			'footer_bg'          => Email_Customizer_Defaults::footer_bg(),
 			'footer_text_color'  => Email_Customizer_Defaults::footer_text_color(),
 			'footer_link_color'  => Email_Customizer_Defaults::footer_link_color(),
-			'additional_css'     => Email_Customizer_Defaults::flat_template_additional_css(),
+			'custom_css'         => Email_Customizer_Defaults::flat_template_additional_css(),
 			'content'            => Email_Customizer_Defaults::default_content(),
 			'preview_text'       => '',
 		);
@@ -196,7 +209,7 @@ class Email_Customizer_Template {
 			'header_1'           => Email_Customizer_Defaults::header_1(),
 			'container_width'    => Email_Customizer_Defaults::container_width(),
 			'header_left_width'  => Email_Customizer_Defaults::header_left_width(),
-			'row_spacing'        => Email_Customizer_Defaults::row_spacing(),
+			'spacing'            => Email_Customizer_Defaults::row_spacing(),
 			'bg_color'           => '#f5f5f5',
 			'bg_image'           => '',
 			'logo'               => '',
@@ -213,7 +226,7 @@ class Email_Customizer_Template {
 			'footer_bg'          => '#222222',
 			'footer_text_color'  => '#ffffff',
 			'footer_link_color'  => '#aaaaaa',
-			'additional_css'     => Email_Customizer_Defaults::additional_css(),
+			'custom_css'         => Email_Customizer_Defaults::additional_css(),
 			'content'            => Email_Customizer_Defaults::default_content(),
 			'preview_text'       => '',
 		);
@@ -234,7 +247,7 @@ class Email_Customizer_Template {
 			'header_1'           => Email_Customizer_Defaults::header_1(),
 			'container_width'    => Email_Customizer_Defaults::container_width(),
 			'header_left_width'  => Email_Customizer_Defaults::header_left_width(),
-			'row_spacing'        => '0px',
+			'spacing'            => '0px',
 			'bg_color'           => Email_Customizer_Defaults::bg_color(),
 			'bg_image'           => Email_Customizer_Defaults::bg_image(),
 			'logo'               => Email_Customizer_Defaults::logo(),
@@ -251,7 +264,7 @@ class Email_Customizer_Template {
 			'footer_bg'          => Email_Customizer_Defaults::footer_bg(),
 			'footer_text_color'  => Email_Customizer_Defaults::footer_text_color(),
 			'footer_link_color'  => Email_Customizer_Defaults::footer_link_color(),
-			'additional_css'     => Email_Customizer_Defaults::additional_css(),
+			'custom_css'         => Email_Customizer_Defaults::additional_css(),
 			'content'            => Email_Customizer_Defaults::default_content(),
 			'preview_text'       => '',
 		);

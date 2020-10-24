@@ -172,7 +172,7 @@
 		}
 
 		.card-spacing {
-			height: <?php echo sanitize_text_field( $row_spacing ); ?>;
+			height: <?php echo sanitize_text_field( $spacing ); ?>;
 		}
 
 		.components__header .components__inner {
@@ -232,7 +232,7 @@
 	</style>
 
 	<style id="email-customizer-preview-custom-css">
-		<?php echo $additional_css; ?>
+		<?php echo $custom_css; ?>
 	</style>
 
 	<!--[if gte mso 9]>

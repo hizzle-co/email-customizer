@@ -238,7 +238,7 @@ class Email_Customizer_Presstomizer {
 	 * @return bool
 	 */
 	public function is_built_in( $handle ) {
-		return strpos( $handle, 'wp' ) === 0 || strpos( $handle, 'customize-' ) === 0 || strpos( $handle, $this->id ) === 0;
+		return strpos( $handle, 'customize-' ) === 0 || strpos( $handle, $this->id ) === 0;
 	}
 
 	/**
@@ -261,6 +261,7 @@ class Email_Customizer_Presstomizer {
 				$this->id
 			)
 		);
+
 	}
 
 	/**
@@ -276,9 +277,10 @@ class Email_Customizer_Presstomizer {
 		if ( is_object( $wp_scripts ) && isset( $wp_scripts->queue ) && is_array( $wp_scripts->queue ) ) {
 
 			foreach ( $wp_scripts->queue as $handle ) {
-				if ( ! in_array( $handle, $exceptions ) && ! $this->is_built_in( $handle ) ) {
+				$src = isset( $wp_scripts->registered[ $handle ] ) ? $wp_scripts->registered[ $handle ]->src : '';
+				if ( ! in_array( $handle, $exceptions ) && ! $wp_scripts->in_default_dir( $src ) && ! $this->is_built_in( $handle ) ) {
 					wp_dequeue_script( $handle );
-				}				
+				}
 			}
 
 		}
