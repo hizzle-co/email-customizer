@@ -31,6 +31,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	public function load_admin_hooks() {
 
 		add_action( 'admin_menu', array( $this, 'display_customizer_link' ) );
+		add_action( 'admin_init', array( $this, 'maybe_switch_template' ) );
 
 		if ( isset( $_GET[ $this->id ] ) || $this->is_autosaving() ) {
 			add_action( 'customize_register', array( $this, 'add_general_panel' ) );
@@ -39,6 +40,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			add_action( 'customize_register', array( $this, 'add_footer_panel' ) );
 			add_action( 'customize_register', array( $this, 'add_css_panel' ) );
 			add_action( 'customize_register', array( $this, 'register_partials' ) );
+			add_action( 'customize_controls_print_footer_scripts', array( $this, 'render_templates' ) );
 		}
 
     }
@@ -53,17 +55,42 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			__( 'Email Customizer', 'email-customizer' ),
 			__( 'Email Customizer', 'email-customizer' ),
 			$this->get_capability(),
-			$this->get_customizer_url() ,
+			$this->get_customizer_url(),
 			null
 		);
 
 	}
 
 	/**
+	 * Handles $_GET requests to switch templates.
+	 */
+	public function maybe_switch_template() {
+
+		if ( current_user_can( $this->get_capability() ) && isset( $_GET['email-customizer-switch-template'] ) ) {
+			$this->switch_template( sanitize_text_field( $_GET['email-customizer-switch-template'] ) );
+		}
+
+	}
+
+	/**
+	 * Switches templates.
+	 */
+	public function switch_template( $template_name ) {
+		$template = new Email_Customizer_Template( array() );
+		$method   = sanitize_key( $template_name ) . '_template';
+
+		if ( is_callable( array( $template, $method ) ) ) {
+			update_option( 'email_customizer', $template->$method() );
+			wp_redirect( $this->get_customizer_url() );
+			exit;
+		}
+ 
+	}
+
+	/**
 	 * Loads the email template class.
 	 */
 	public function load_email_template() {
-		// noptin_dump( get_option( 'email_customizer', array() ) );exit;
 		$template = new Email_Customizer_Template( get_option( 'email_customizer', array() ) );
 		$template->render();
 	}
@@ -104,6 +131,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			array(
 				'changeTheme' => __( 'Change Template', 'email-customizer' ),
 				'close'       => __( 'Close', 'email-customizer' ),
+				'switcherURL' => add_query_arg( 'email-customizer-switch-template', '%template%', admin_url() ),
 			)
 		);
 
@@ -760,9 +788,15 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 	}
 
+	/**
+	 * Displays control templates.
+	 *
+	 */
+	public function render_templates() {
+		require_once plugin_dir_path( __FILE__ ) . 'template/customizer-controls.php';
+	}
+
 }
 
 // Test Emails.
 // Filter Emails.
-// Saving Options.
-// Template switcher.

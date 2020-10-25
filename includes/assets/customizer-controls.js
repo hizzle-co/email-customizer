@@ -1,50 +1,54 @@
 ( function( $ ) {
 
-	// Close button div html.
-	var switchThemesClose = '<div class="close-button-div"><button class="button button-secondary">' + email_customizer_i10n.close + '</button></div>';
-
-	//Loader.
+	// Loader.
 	var loader = '<span class="spinner" style="visibility: visible"></span>';
 
-	// Create the main popup and add a loading spinner to it.
-	var switchThemesPopup =
-		$( 'body')
-			.append( '<div class="email-customizer-change-theme-popup"></div>' )
-			.find( '.email-customizer-change-theme-popup' )
-			.append( loader );
-
-	// Helper function to attach a close button to a popup.
-	var appendPopupClose = function () {
-		$(switchThemesPopup)
-			.append('<span class="mo-popup-close"><span class="dashicons dashicons-no" style="font-size: 2.5em;cursor: pointer"></span></span>')
-			.find('.mo-popup-close')
-			.attr('title', email_customizer_i10n.close)
-			.on('click', function () {
-				$(switchThemesPopup)
-					.removeClass( 'email-customizer-change-theme-popup-show' )
-					.html(loader)
-			});
-	};
+	// Closes the theme switcher when the close button is clicked.
+	$( '.email-customizer-popup-close' ).on(
+		'click',
+		function() {
+			$( '.email-customizer-change-theme-popup' )
+				.removeClass( 'email-customizer-change-theme-popup-show' )
+		}
+	);
 
 	// Create the switch themes button...
-	var switchThemesButton =
-		$( '#customize-info .customize-help-toggle' )
-			.after( '<div style="text-align: right;"><button></button></div>' )
-			.next()
-			.find( 'button' )
-			.text( email_customizer_i10n.changeTheme )
-			.attr( 'aria-label', email_customizer_i10n.changeTheme )
-			.attr( 'type', 'button' )
-			.addClass( 'button change-theme email-customizer-change-theme-button' );
+	$( '#customize-info .customize-help-toggle' )
+		.after( '<div style="text-align: right;"><button></button></div>' )
+		.next()
+		.find( 'button' )
+		.text( email_customizer_i10n.changeTheme )
+		.attr( 'aria-label', email_customizer_i10n.changeTheme )
+		.attr( 'type', 'button' )
+		.addClass( 'button change-theme email-customizer-change-theme-button' )
+		.on(
+			'click',
+			function (e) {
+				e.preventDefault();
 
+				// Display the lightbox
+				$( '.email-customizer-change-theme-popup' ).addClass( 'email-customizer-change-theme-popup-show' );
+			}
+		);
 
-	// ... which when clicked loads email templates.
-	$( switchThemesButton ).on( 'click', function (e) {
-		e.preventDefault();
+		// Changes the template.
+		$( '.email-customizer-change-theme-popup-submit' ).on(
+			'click',
+			function( e ) {
+				e.preventDefault();
 
-		// Display the lightbox
-		$( switchThemesPopup ).addClass( 'email-customizer-change-theme-popup-show' );
+				// Save changes.
+				$('#save').click();
 
-	})
+				// Get the template.
+				var template = $( '.email-customizer-change-theme-popup select' ).val()
 
+				// Display the loader.
+				$( '.email-customizer-change-theme-popup' ).html( loader )
+
+				// Reload the page.
+				window.location = email_customizer_i10n.switcherURL.replace( '%template%', template )
+			}
+		);
+		
 } )( jQuery );
