@@ -450,7 +450,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[bg_image]',
 			__( 'Background Image', 'email-customizer' ),
 			'email_customizer_general',
-			Email_Customizer_Defaults::bg_image(),
+			Email_Customizer_Defaults::bg_image()
 		);
 
 		// Background Color.
@@ -459,7 +459,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[bg_color]',
 			__( 'Background Color', 'email-customizer' ),
 			'email_customizer_general',
-			Email_Customizer_Defaults::bg_color(),
+			Email_Customizer_Defaults::bg_color()
 		);
 
 	}
@@ -584,7 +584,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[content_bg]',
 			__( 'Background Color', 'email-customizer' ),
 			'email_customizer_content',
-			Email_Customizer_Defaults::content_bg(),
+			Email_Customizer_Defaults::content_bg()
 		);
 
 		// Text Color.
@@ -593,7 +593,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[content_text_color]',
 			__( 'Text Color', 'email-customizer' ),
 			'email_customizer_content',
-			Email_Customizer_Defaults::content_text_color(),
+			Email_Customizer_Defaults::content_text_color()
 		);
 
 		// Link Color.
@@ -602,7 +602,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[content_link_color]',
 			__( 'Link Color', 'email-customizer' ),
 			'email_customizer_content',
-			Email_Customizer_Defaults::content_link_color(),
+			Email_Customizer_Defaults::content_link_color()
 		);
 
 	}
@@ -629,7 +629,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[footer_1]',
 			__( 'Footer Text 1', 'email-templates' ),
 			'email_customizer_footer',
-			Email_Customizer_Defaults::footer_1(),
+			Email_Customizer_Defaults::footer_1()
 		);
 
 		// Footer text.  - Text on the right.
@@ -638,7 +638,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[footer_2]',
 			__( 'Footer Text 2', 'email-templates' ),
 			'email_customizer_footer',
-			Email_Customizer_Defaults::footer_2(),
+			Email_Customizer_Defaults::footer_2()
 		);
 
 		// Text Size.
