@@ -799,4 +799,3 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 }
 
 // Test Emails.
-// Filter Emails.

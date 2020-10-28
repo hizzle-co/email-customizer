@@ -47,7 +47,7 @@ class Email_Customizer_Mailer {
 		$matches = array();
 		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
 
-		if ( isset( $matches[1] ) ) {
+		if ( ! empty( $matches[1] ) ) {
 			return trim( $matches[1] );
 		}
 
