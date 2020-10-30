@@ -252,7 +252,6 @@ class Email_Customizer_Presstomizer {
 			"presstomizer_{$this->id}_allowed_scripts",
 			array(
 				'jquery-core',
-				'jquery-migrate',
 				'jquery',
 				'customize-preview',
 				'customize-controls',
