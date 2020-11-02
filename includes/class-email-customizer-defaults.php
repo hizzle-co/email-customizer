@@ -286,7 +286,7 @@ class Email_Customizer_Defaults {
 	 */
 	public static function default_content(){
 
-		$content  = '<p>' . __( 'Your email content will appear here.', 'email-customizer' ) . '</p>';
+		$content  = '<p>' . __( 'All emails that WordPress sends from your website will use this template. The email content will appear here', 'email-customizer' ) . '</p>';
 		$content .= '<p>' . __( 'You can use any of these placeholders in the header and footer texts and they will be replaced by the actual values.', 'email-customizer' ) . '</p>';
 		$content .= '<ul>
 			<li>{{BLOG_URL}}</li>
@@ -299,7 +299,8 @@ class Email_Customizer_Defaults {
 			<li>{{MONTH}}</li>
 			<li>{{DAY}}</li>
 		</ul>';
-		
+
+		$content .= '<a href="https://github.com/hizzle-co/email-customizer/issues/new/choose">' . __( 'You are welcome to report bugs and request features via GitHub.', 'email-customizer' ) . '</a>';
 		return $content;
 	}
 

@@ -1,0 +1,256 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Email Customizer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-02 06:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.0; wp-5.5.3"
+
+#. %s: PHP version
+#: email-customizer.php:59
+#, php-format
+msgid ""
+"Email Customizer requires PHP version %s+. Because you are using an earlier "
+"version, the plugin is currently NOT RUNNING."
+msgstr ""
+
+#. %s: WordPress version
+#: email-customizer.php:75
+#, php-format
+msgid ""
+"Email Customizer requires WordPress version %s+. Because you are using an "
+"earlier version, the plugin is currently NOT RUNNING."
+msgstr ""
+
+#. %s: DOMDocument
+#: email-customizer.php:91
+#, php-format
+msgid ""
+"Email Customizer requires that you install the %s PHP extension. Please "
+"contact your web-host for instructions on how to do that."
+msgstr ""
+
+#. Name of the plugin
+#: includes/class-email-customizer-admin.php:55
+#: includes/class-email-customizer-admin.php:56
+msgid "Email Customizer"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:151
+msgid "Change Template"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:152
+#: includes/class-email-customizer-admin.php:379
+#: includes/template/customizer-controls.php:24
+msgid "Close"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:362
+msgid ""
+"Add your own CSS code here to customize the appearance and layout of your "
+"emails."
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:366
+msgid "Learn more about CSS"
+msgstr ""
+
+#. Accessibility text.
+#: includes/class-email-customizer-admin.php:368
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:372
+msgid "When using a keyboard to navigate:"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:374
+msgid "In the editing area, the Tab key enters a tab character."
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:375
+msgid "To move away from this area, press the Esc key followed by the Tab key."
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:376
+msgid ""
+"Screen reader users: when in forms mode, you may need to press the Esc key "
+"twice."
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:386
+msgid "Additional CSS"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:410
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:435
+msgid "General"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:443
+msgid "Container Width"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:452
+msgid "Left Header Width"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:461
+msgid "Section Spacing"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:470
+msgid "Background Image"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:479
+#: includes/class-email-customizer-admin.php:542
+#: includes/class-email-customizer-admin.php:604
+#: includes/class-email-customizer-admin.php:676
+msgid "Background Color"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:498
+msgid "Header"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:506
+msgid "Logo"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:515
+msgid "Header Text 1"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:524
+msgid "Header Text 2"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:533
+#: includes/class-email-customizer-admin.php:595
+#: includes/class-email-customizer-admin.php:667
+msgid "Font Size"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:551
+#: includes/class-email-customizer-admin.php:613
+#: includes/class-email-customizer-admin.php:685
+msgid "Text Color"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:560
+#: includes/class-email-customizer-admin.php:622
+#: includes/class-email-customizer-admin.php:694
+msgid "Link Color"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:579
+msgid "Content"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:587
+msgid "Before Content"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:641
+msgid "Footer"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:649
+msgid "Footer Text 1"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:658
+msgid "Footer Text 2"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:21
+#, php-format
+msgid "Powered by the %1$sEmail Customizer%2$s WordPress plugin"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:43
+#, php-format
+msgid "This email was sent from %1$s on %2$s"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:273
+msgid "white hippie glasses neon light decor on door"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:276
+#, php-format
+msgid "Photo by %1$s on %2$s"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:289
+msgid ""
+"All emails that WordPress sends from your website will use this template. "
+"The email content will appear here"
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:290
+msgid ""
+"You can use any of these placeholders in the header and footer texts and "
+"they will be replaced by the actual values."
+msgstr ""
+
+#: includes/class-email-customizer-defaults.php:303
+msgid "You are welcome to report bugs and request features via GitHub."
+msgstr ""
+
+#: includes/template/customizer-controls.php:8
+msgid "Select Template"
+msgstr ""
+
+#: includes/template/customizer-controls.php:12
+msgid "Default"
+msgstr ""
+
+#: includes/template/customizer-controls.php:13
+msgid "Flat"
+msgstr ""
+
+#: includes/template/customizer-controls.php:14
+msgid "Dark"
+msgstr ""
+
+#: includes/template/customizer-controls.php:15
+msgid "Hero Image"
+msgstr ""
+
+#: includes/template/customizer-controls.php:20
+msgid "Use Template"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Easily replace the plain and ugly WordPress emails with beautiful HTML "
+"emails that match your brand colors. All without writing a single line of "
+"code."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/hizzle-co/email-customizer"
+msgstr ""
+
+#. Author of the plugin
+msgid "Noptin Team"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://noptin.com"
+msgstr ""

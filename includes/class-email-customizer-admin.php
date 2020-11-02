@@ -70,6 +70,25 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$this->switch_template( sanitize_text_field( $_GET['email-customizer-switch-template'] ) );
 		}
 
+		if ( ! wp_doing_ajax() && '1' !== get_option( 'email-customizer-redirected', 'email-customizer' ) ) {
+
+		}
+
+		// Redirect to welcome page.
+		if ( ! get_option( 'email-customizer-redirected', false ) && ! wp_doing_ajax() ) {
+
+			// Ensure were not activating from network, or bulk.
+			if ( ! is_network_admin() && ! isset( $_GET['activate-multi'] ) ) {
+
+				// Prevent further redirects.
+				update_option( 'email-customizer-redirected', '1' );
+
+				// Redirect to the welcome page.
+				$this->switch_template( 'default' );
+
+			}
+		}
+
 	}
 
 	/**
@@ -84,14 +103,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			wp_redirect( $this->get_customizer_url() );
 			exit;
 		}
- 
+
 	}
 
 	/**
 	 * Loads the email template class.
 	 */
 	public function load_email_template() {
-		$template = new Email_Customizer_Template( get_option( 'email_customizer', array() ) );
+		$template = new Email_Customizer_Template( get_option( 'email_customizer', array() ), true );
 		$template->render();
 	}
 
@@ -388,7 +407,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				$wp_customize,
 				'email_customizer_custom_css',
 				array(
-					'label'       => __( 'Custom CSS', 'email-templates' ),
+					'label'       => __( 'Custom CSS', 'email-customizer' ),
 					'section'     => 'email_customizer_css',
 					'settings'    => 'email_customizer[custom_css]',
 					'code_type'   => 'text/css',
@@ -421,7 +440,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[container_width]',
-			__( 'Container Width', 'email-templates' ),
+			__( 'Container Width', 'email-customizer' ),
 			'email_customizer_general',
 			Email_Customizer_Defaults::container_width()
 		);
@@ -430,7 +449,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[header_left_width]',
-			__( 'Left Header Width', 'email-templates' ),
+			__( 'Left Header Width', 'email-customizer' ),
 			'email_customizer_general',
 			Email_Customizer_Defaults::header_left_width()
 		);
@@ -439,7 +458,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[spacing]',
-			__( 'Section Spacing', 'email-templates' ),
+			__( 'Section Spacing', 'email-customizer' ),
 			'email_customizer_general',
 			Email_Customizer_Defaults::row_spacing()
 		);
@@ -493,7 +512,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[header_1]',
-			__( 'Header Text 1', 'email-templates' ),
+			__( 'Header Text 1', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_1()
 		);
@@ -502,7 +521,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[header_2]',
-			__( 'Header Text 2', 'email-templates' ),
+			__( 'Header Text 2', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_2()
 		);
@@ -511,7 +530,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[header_font_size]',
-			__( 'Font Size', 'email-templates' ),
+			__( 'Font Size', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::header_font_size()
 		);
@@ -565,7 +584,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[before_content]',
-			__( 'Before Content', 'email-templates' ),
+			__( 'Before Content', 'email-customizer' ),
 			'email_customizer_content'
 		);
 
@@ -573,7 +592,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[content_font_size]',
-			__( 'Font Size', 'email-templates' ),
+			__( 'Font Size', 'email-customizer' ),
 			'email_customizer_content',
 			Email_Customizer_Defaults::content_font_size()
 		);
@@ -627,7 +646,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[footer_1]',
-			__( 'Footer Text 1', 'email-templates' ),
+			__( 'Footer Text 1', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_1()
 		);
@@ -636,7 +655,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_code(
 			$wp_customize,
 			'email_customizer[footer_2]',
-			__( 'Footer Text 2', 'email-templates' ),
+			__( 'Footer Text 2', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_2()
 		);
@@ -645,7 +664,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$this->add_text(
 			$wp_customize,
 			'email_customizer[footer_font_size]',
-			__( 'Font Size', 'email-templates' ),
+			__( 'Font Size', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_font_size()
 		);

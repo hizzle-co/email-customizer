@@ -22,10 +22,14 @@ class Email_Customizer_Template {
 	 *
 	 * @param array $args Template args.
 	 */
-	public function __construct( $args ) {
+	public function __construct( $args, $is_preview = false ) {
 
 		if ( ! is_array( $args ) ) {
 			$args =  array();
+		}
+
+		if ( $is_preview && isset( $args['content'] ) ) {
+			unset( $args['content'] );
 		}
 
 		$this->args = array_merge( $this->default_template(), $args );
