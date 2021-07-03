@@ -16,23 +16,21 @@ Easily replace the plain and ugly WordPress emails with beautiful HTML emails th
 **Email Customizer is a lightweight Email Customizer Plugin For WordPress.**
 ★★★★★<br>
 
-If you don't like the plain text emails that WordPress sends to users after they create an account on your site, request to reset their password etc., then this plugin
-can help you convert those emails to HTML.
+With this plugin, you can convert the plain text emails that WordPress sends into beautiful HTML emails.
 
-This way, the colors and appearance of your emails will match that of your website thereby improving your brand's credibility.
+These include the emails that WordPress sends to users after they create an account on your website or request to reset their password.
 
-This plugin uses email templates to customize your WordPress emails. You can edit the template and set text sizes, colors, link colors and backgrounds. You can also add your custom CSS and 
-it will be inlined in your email. All emails sent by WordPress will then be overidden to use your template.
+The email customizer plugin wraps all your WordPress emails inside of a HTML template. As a result, the colors and appearance of your emails will match that of your website.
 
-It works the same was that WordPress themes work.
+You can edit the email template and set text sizes, colors and backgrounds. You can also define custom CSS for your emails and it will be inlined inside the emails.
 
-**Noptin is our free and lightweight WordPress newsletter plugin. [Learn more](https://wordpress.org/plugins/newsletter-optin-box/).**
+**Noptin is a free and lightweight WordPress newsletter plugin. [Learn more](https://wordpress.org/plugins/newsletter-optin-box/).**
 
 == Installation ==
 
 * Go to WordPress Dashboard.
 * Click on Plugins -> Add New
-* Search for "**Email Customizer**"
+* Search for "**Noptin Email Customizer**"
 * Find the plugin and click on the Install Now button
 * After installation, click on Activate Plugin link to activate the plugin.
 
@@ -58,6 +56,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 5. The hero image email template
 
 == Changelog ==
+
+= 1.0.1 - 2021-07-03 =
+- Astra theme controls appear in email template customizer - FIXED.
 
 = 1.0.0 - 2020-11-02 =
 

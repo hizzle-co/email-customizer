@@ -66,6 +66,7 @@ class Email_Customizer_Presstomizer {
 
 		// Do not load core components.
 		add_filter( 'customize_loaded_components', '__return_empty_array', 999999 );
+		add_filter( 'astra_customizer_configurations', '__return_empty_array', 999999 );
 
 		// Load our own template.
 		add_action( 'template_redirect', array( $this, 'maybe_display_frontend' ) );

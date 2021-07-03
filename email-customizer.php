@@ -123,3 +123,5 @@ if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
     require plugin_dir_path( __FILE__ ) . 'includes/class-email-customizer.php';
     $GLOBALS['email_customizer'] = new Email_Customizer();
 }
+
+// TODO: Create a skipper class for BuddyPress, WC, Noptin

@@ -105,7 +105,7 @@ class Email_Customizer_Mailer {
 	 */
 	public function maybe_wrap_email( $args ) {
 
-		if ( apply_filters( 'email_customizer_disable_template_wrap', false ) ) {
+		if ( apply_filters( 'email_customizer_disable_template_wrap', false, $args ) ) {
 			return $args;
 		}
 

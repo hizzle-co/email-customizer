@@ -102,7 +102,7 @@ class Email_Customizer_Template {
 	public static function parse_tags( $string ) {
 
 		// Prepare merge tags.
-		$blog_url = 'page' === get_option( 'show_on_front' ) ? get_permalink( get_option( 'page_for_posts' ) ) : get_home_url();
+		$blog_url = ( 'page' === get_option( 'show_on_front' ) && did_action( 'init' ) ) ? get_permalink( get_option( 'page_for_posts' ) ) : get_home_url();
 		$tags     = array(
 			'{{BLOG_URL}}'         => esc_url_raw( $blog_url ),
 			'{{HOME_URL}}'         => esc_url_raw( get_home_url() ),
