@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Email Customizer
- * Description: Easily replace the plain and ugly WordPress emails with beautiful HTML emails that match your brand colors. All without writing a single line of code.
+ * Description: Easily replace the plain text WordPress emails with beautiful HTML emails that match your brand colors. All without writing a single line of code.
  * Plugin URI: https://github.com/hizzle-co/email-customizer
  * Author: Noptin Team
  * Version: 1.0.0
@@ -123,5 +123,3 @@ if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
     require plugin_dir_path( __FILE__ ) . 'includes/class-email-customizer.php';
     $GLOBALS['email_customizer'] = new Email_Customizer();
 }
-
-// TODO: Create a skipper class for BuddyPress, WC, Noptin

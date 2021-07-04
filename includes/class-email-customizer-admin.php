@@ -30,6 +30,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 */
 	public function load_admin_hooks() {
 
+		add_filter( 'plugin_action_links_email-customizer/email-customizer.php', array( $this, 'link_to_settings' ) );
 		add_action( 'admin_menu', array( $this, 'display_customizer_link' ) );
 		add_action( 'admin_init', array( $this, 'maybe_switch_template' ) );
 
@@ -44,6 +45,23 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		}
 
     }
+
+	/**
+	 * Links to the settings page.
+	 *
+	 * @param array $actions
+	 */
+	public function link_to_settings( $actions ) {
+
+		$actions[] = sprintf(
+			'<a href="%s" style="color: #33691e;">%s</a>',
+			esc_url( $this->get_customizer_url() ),
+			__( 'Edit template', 'email-customizer' )
+		);
+
+		return $actions;
+
+	}
 
 	/**
 	 * Add an admin link to the customizer.
