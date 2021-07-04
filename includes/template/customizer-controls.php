@@ -12,6 +12,7 @@
 				<option value="default" selected="selected"><?php esc_html_e( 'Default', 'email-customizer' ); ?></option>
 				<option value="flat"><?php esc_html_e( 'Flat', 'email-customizer' ); ?></option>
 				<option value="dark"><?php esc_html_e( 'Dark', 'email-customizer' ); ?></option>
+				<option value="simple"><?php esc_html_e( 'Simple', 'email-customizer' ); ?></option>
 				<option value="hero_image"><?php esc_html_e( 'Hero Image', 'email-customizer' ); ?></option>
 			</select>
 

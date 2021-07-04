@@ -198,7 +198,7 @@ class Email_Customizer_Defaults {
 	 * Footer link color.
 	 */
 	public static function footer_link_color(){
-		return '#aaaaaa';
+		return '#a1a1a1';
 	}
 
 	/**
@@ -228,6 +228,40 @@ class Email_Customizer_Defaults {
 	text-align: center;
 	font-weight: 400;
 }
+';
+	}
+
+	/**
+	 * Additional CSS
+	 */
+	public static function simple_template_additional_css(){
+		return 
+'.components__inner {
+	border-radius: 0px;
+	text-align: left
+}
+
+.hero-section p,
+.components__footer .components__inner,
+.content {
+	padding: 10px 35px;
+}
+
+.components__header .components__inner {
+	padding: 30px 35px;
+}
+
+.hero-section p {
+	padding: 5px 35px;
+    margin: 0;
+}
+
+.components__inner .footer-1,
+.components__inner .footer-2 {
+	text-align: center;
+	font-weight: 400;
+}
+
 ';
 	}
 

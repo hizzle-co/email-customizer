@@ -59,6 +59,8 @@ There are a lot of ways to contribute this newsletter plugin:-
 
 = 1.0.1 - 2021-07-03 =
 - Astra theme controls appear in email template customizer - FIXED.
+- Add new email template.
+- Only plain emails are overidden.
 
 = 1.0.0 - 2020-11-02 =
 

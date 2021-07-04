@@ -21,6 +21,21 @@ class Email_Customizer_Mailer {
 	public $forced_html = false;
 
 	/**
+	 * @var null|string
+	 */
+	public static $custom_footer_1 = null;
+
+	/**
+	 * @var null|string
+	 */
+	public static $custom_footer_2 = null;
+
+	/**
+	 * @var string
+	 */
+	public static $preview_text = '';
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since  1.0.0
@@ -67,8 +82,20 @@ class Email_Customizer_Mailer {
 		$email_content   = apply_filters( 'email_customizer_email_content', $email_content );
 		$args            = get_option( 'email_customizer', array() );
 		$args            = is_array( $args ) ? $args : array();
-		$args['content'] = $email_content;
-		$template        = new Email_Customizer_Template( $args );
+
+		if ( ! is_null( self::$custom_footer_1 ) ) {
+			$args['footer_1']      = self::$custom_footer_1;
+			self::$custom_footer_1 = null;
+		}
+
+		if ( ! is_null( self::$custom_footer_2 ) ) {
+			$args['footer_2']      = self::$custom_footer_2;
+			self::$custom_footer_1 = null;
+		}
+
+		$args['preview_text'] = self::$preview_text;
+		$args['content']      = $email_content;
+		$template             = new Email_Customizer_Template( $args );
 
 		ob_start();
 		$template->render();

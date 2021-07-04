@@ -275,4 +275,42 @@ class Email_Customizer_Template {
 
 	}
 
+	/**
+	 * Returns the simple template.
+	 *
+	 * @return array $args Template args.
+	 */
+	public function simple_template() {
+
+		return array(
+			'footer_2'           => Email_Customizer_Defaults::footer_2(),
+			'footer_1'           => Email_Customizer_Defaults::footer_1(),
+			'header_2'           => str_ireplace( 'black', 'white', Email_Customizer_Defaults::header_2() ),
+			'header_1'           => Email_Customizer_Defaults::header_1(),
+			'container_width'    => Email_Customizer_Defaults::container_width(),
+			'header_left_width'  => Email_Customizer_Defaults::header_left_width(),
+			'spacing'            => '0px',
+			'bg_color'           => Email_Customizer_Defaults::bg_color(),
+			'bg_image'           => Email_Customizer_Defaults::bg_image(),
+			'logo'               => Email_Customizer_Defaults::logo(),
+			'header_font_size'   => Email_Customizer_Defaults::header_font_size(),
+			'header_bg'          => '#8224e3',
+			'header_text_color'  => '#ffffff',
+			'header_link_color'  => '#d6d6d6',
+			'before_content'     => '',
+			'content_font_size'  => Email_Customizer_Defaults::content_font_size(),
+			'content_bg'         => Email_Customizer_Defaults::content_bg(),
+			'content_text_color' => Email_Customizer_Defaults::content_text_color(),
+			'content_link_color' => Email_Customizer_Defaults::content_link_color(),
+			'footer_font_size'   => Email_Customizer_Defaults::footer_font_size(),
+			'footer_bg'          => Email_Customizer_Defaults::footer_bg(),
+			'footer_text_color'  => Email_Customizer_Defaults::footer_text_color(),
+			'footer_link_color'  => Email_Customizer_Defaults::footer_link_color(),
+			'custom_css'         => Email_Customizer_Defaults::simple_template_additional_css(),
+			'content'            => Email_Customizer_Defaults::default_content(),
+			'preview_text'       => '',
+		);
+
+	}
+
 }

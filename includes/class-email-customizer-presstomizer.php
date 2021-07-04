@@ -68,6 +68,11 @@ class Email_Customizer_Presstomizer {
 		add_filter( 'customize_loaded_components', '__return_empty_array', 999999 );
 		add_filter( 'astra_customizer_configurations', '__return_empty_array', 999999 );
 
+		if ( class_exists( 'Astra_Customizer' ) ) {
+			remove_action( 'customize_preview_init', array( Astra_Customizer::get_instance(), 'preview_init' ) );
+			remove_filter( 'customize_controls_enqueue_scripts', array( Astra_Customizer::get_instance(), 'enqueue_customizer_scripts' ), 999 );
+		}
+
 		// Load our own template.
 		add_action( 'template_redirect', array( $this, 'maybe_display_frontend' ) );
 
