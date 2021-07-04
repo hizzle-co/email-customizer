@@ -2,14 +2,14 @@
 Contributors: picocodes
 Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
-Tested up to: 5.5
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
 
-Easily replace the plain and ugly WordPress emails with beautiful HTML emails that match your brand colors. All without writing a single line of code.
+Easily replace the plain text WordPress emails with beautiful HTML emails that match your brand colors. All without writing a single line of code.
 
 == Description ==
 

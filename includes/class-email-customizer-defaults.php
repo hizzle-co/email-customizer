@@ -286,7 +286,7 @@ class Email_Customizer_Defaults {
 	 */
 	public static function default_content(){
 
-		$content  = '<p>' . __( 'All emails that WordPress sends from your website will use this template. The email content will appear here', 'email-customizer' ) . '</p>';
+		$content  = '<p>' . __( 'All plain emails that WordPress sends from your website will use this template. The email content will appear here', 'email-customizer' ) . '</p>';
 		$content .= '<p>' . __( 'You can use any of these placeholders in the header and footer texts and they will be replaced by the actual values.', 'email-customizer' ) . '</p>';
 		$content .= '<ul>
 			<li>{{BLOG_URL}}</li>

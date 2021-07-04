@@ -16,9 +16,9 @@ defined( 'ABSPATH' ) || exit;
 class Email_Customizer_Mailer {
 
 	/**
-	 * @var bool  $forced_html Whether or not this was previously a text email.
+	 * @var bool Whether or not the email was initially a HTML email
 	 */
-	protected $forced_html = false;
+	public $forced_html = false;
 
 	/**
 	 * Class constructor.
@@ -36,67 +36,6 @@ class Email_Customizer_Mailer {
 	}
 
 	/**
-	 * Retrieves the contents of the `<body>` tags of HTML emails.
-	 *
-	 * @since 1.0.0
-	 * @param string $maybe_html_content The email content.
-	 * @return string
-	 */
-	public function maybe_remove_body( $maybe_html_content ) {
-
-		$matches = array();
-		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
-
-		if ( ! empty( $matches[1] ) ) {
-			return trim( $matches[1] );
-		}
-
-		return $maybe_html_content;
-
-	}
-
-	/**
-	 * Converts a text email to HTML.
-	 *
-	 * @since 1.0.0
-	 * @param string $text_content The email content.
-	 * @return string
-	 */
-	public function maybe_convert_to_html( $text_content ) {
-
-		if ( $this->forced_html ) {
-
-			$text_content      = wp_kses_post( wpautop( $text_content ) );
-			$this->forced_html = false;
-
-		}
-
-		return $text_content;
-
-	}
-
-	/**
-	 * Force all emails to use HTML.
-	 *
-	 * @since 1.0.0
-	 * @param string $type The email type.
-	 * @return string
-	 */
-	public function maybe_force_html( $type ) {
-
-		if ( apply_filters( 'email_customizer_disable_template_wrap', false ) ) {
-			return $type;
-		}
-
-		if ( $type != 'text/html' ) {
-			$this->forced_html = true;
-		}
-
-		return 'text/html';
-
-	}
-
-	/**
 	 * Wrap emails with our template.
 	 *
 	 * @since 1.0.0
@@ -105,7 +44,7 @@ class Email_Customizer_Mailer {
 	 */
 	public function maybe_wrap_email( $args ) {
 
-		if ( apply_filters( 'email_customizer_disable_template_wrap', false, $args ) ) {
+		if ( apply_filters( 'email_customizer_disable_template_wrap', $this->is_wrapped( $args['message'] ), $args ) ) {
 			return $args;
 		}
 
@@ -134,6 +73,76 @@ class Email_Customizer_Mailer {
 		ob_start();
 		$template->render();
 		return $this->inline_css( ob_get_clean() );
+
+	}
+
+	/**
+	 * Checks if the email is already wrapped between `<body>` tags.
+	 *
+	 * @since 1.0.0
+	 * @param string $maybe_html_content The email content.
+	 * @return bool
+	 */
+	public function is_wrapped( $maybe_html_content ) {
+
+		$matches = array();
+		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
+
+		if ( ! empty( $matches[1] ) ) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	/**
+	 * Retrieves the contents of the `<body>` tags of HTML emails.
+	 *
+	 * @since 1.0.0
+	 * @param string $maybe_html_content The email content.
+	 * @return string
+	 */
+	public function maybe_remove_body( $maybe_html_content ) {
+
+		$matches = array();
+		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
+
+		$this->forced_html = empty( $matches[1] );
+
+		if ( ! empty( $matches[1] ) ) {
+			return trim( $matches[1] );
+		}
+
+		return $maybe_html_content;
+
+	}
+
+	/**
+	 * Converts a text email to HTML.
+	 *
+	 * @since 1.0.0
+	 * @param string $text_content The email content.
+	 * @return string
+	 */
+	public function maybe_convert_to_html( $text_content ) {
+		return $this->forced_html ? wp_kses_post( wpautop( force_balance_tags( make_clickable( $text_content ) ) ) ) : $text_content;
+	}
+
+	/**
+	 * Force all emails to use HTML.
+	 *
+	 * @since 1.0.0
+	 * @param string $type The email type.
+	 * @return string
+	 */
+	public function maybe_force_html( $type ) {
+
+		if ( ! apply_filters( 'email_customizer_force_html', true ) ) {
+			return $type;
+		}
+
+		return 'text/html';
 
 	}
 
