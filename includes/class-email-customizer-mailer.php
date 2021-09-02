@@ -43,10 +43,11 @@ class Email_Customizer_Mailer {
 	 */
 	public function __construct() {
 
-		add_filter( 'wp_mail', array( $this, 'maybe_wrap_email' ), 100 );
+		add_filter( 'wp_mail', array( $this, 'maybe_wrap_email' ), 11 );
 		add_action( 'wp_mail_content_type', array( $this, 'maybe_force_html' ), 100 );
 		add_action( 'email_customizer_email_content', array( $this, 'maybe_remove_body' ), 5 );
 		add_action( 'email_customizer_email_content', array( $this, 'maybe_convert_to_html' ), 8 );
+		add_action( 'noptin_generate_preview_email', array( $this, 'maybe_process_noptin_email' ) );
 
 	}
 
@@ -194,6 +195,26 @@ class Email_Customizer_Mailer {
 		} catch ( Exception $e ) {
 			return $content;
 		}
+
+	}
+
+	/**
+	 * Process a custom email.
+	 *
+	 * @since 1.0.0
+	 * @param string $maybe_html_content The email content.
+	 * @return string
+	 */
+	public function maybe_process_noptin_email( $maybe_html_content ) {
+
+		$matches = array();
+		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
+
+		if ( ! empty( $matches[1] ) ) {
+			return $maybe_html_content;
+		}
+
+		return $this->add_template( $maybe_html_content );
 
 	}
 

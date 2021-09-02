@@ -57,6 +57,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 
 == Changelog ==
 
+= 1.0.2 - 2021-09-02 =
+* Filter Noptin preview email - ADDED
+
 = 1.0.1 - 2021-07-03 =
 - Astra theme controls appear in email template customizer - FIXED.
 - Add new email template.

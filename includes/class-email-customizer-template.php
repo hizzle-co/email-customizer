@@ -60,11 +60,11 @@ class Email_Customizer_Template {
 		extract( $this->args );
 
 		$path = apply_filters( 'email_customizer_template_path', plugin_dir_path( __FILE__ ) . 'template/' );
-		require_once $path . 'header.php';
-		require_once $path . 'heading.php';
-		require_once $path . 'content.php';
-		require_once $path . 'bottom.php';
-		require_once $path . 'footer.php';
+		include $path . 'header.php';
+		include $path . 'heading.php';
+		include $path . 'content.php';
+		include $path . 'bottom.php';
+		include $path . 'footer.php';
 
 	}
 
