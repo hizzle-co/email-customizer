@@ -88,10 +88,6 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$this->switch_template( sanitize_text_field( $_GET['email-customizer-switch-template'] ) );
 		}
 
-		if ( ! wp_doing_ajax() && '1' !== get_option( 'email-customizer-redirected', 'email-customizer' ) ) {
-
-		}
-
 		// Redirect to welcome page.
 		if ( ! get_option( 'email-customizer-redirected', false ) && ! wp_doing_ajax() ) {
 
@@ -118,7 +114,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 
 		if ( is_callable( array( $template, $method ) ) ) {
 			update_option( 'email_customizer', $template->$method() );
-			wp_redirect( $this->get_customizer_url() );
+			wp_safe_redirect( $this->get_customizer_url() );
 			exit;
 		}
 
@@ -189,12 +185,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$wp_customize->add_setting(
 			$setting_id,
 			array(
-				'type'                  => 'option',
-				'default'               => $default_value,
-				'transport'             => 'postMessage',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => 'sanitize_hex_color',
-				'sanitize_js_callback'  => 'maybe_hash_hex_color',
+				'type'                 => 'option',
+				'default'              => $default_value,
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => 'sanitize_hex_color',
+				'sanitize_js_callback' => 'maybe_hash_hex_color',
 			)
 		);
 
@@ -204,9 +200,9 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				$wp_customize,
 				sanitize_key( $setting_id ),
 				array(
-					'label'      => $label,
-					'section'    => $section,
-					'settings'   => $setting_id,
+					'label'    => $label,
+					'section'  => $section,
+					'settings' => $setting_id,
 				)
 			)
 		);
@@ -228,12 +224,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$wp_customize->add_setting(
 			$setting_id,
 			array(
-				'type'                  => 'option',
-				'default'               => $default_value,
-				'transport'             => 'postMessage',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => 'wp_kses_post',
-				'sanitize_js_callback'  => '',
+				'type'                 => 'option',
+				'default'              => $default_value,
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => 'wp_kses_post',
+				'sanitize_js_callback' => '',
 			)
 		);
 
@@ -243,10 +239,10 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				$wp_customize,
 				sanitize_key( $setting_id ),
 				array(
-					'label'         => $label,
-					'type'          => 'textarea',
-					'section'       => $section,
-					'settings'      => $setting_id,
+					'label'    => $label,
+					'type'     => 'textarea',
+					'section'  => $section,
+					'settings' => $setting_id,
 				)
 			)
 		);
@@ -268,12 +264,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$wp_customize->add_setting(
 			$setting_id,
 			array(
-				'type'                  => 'option',
-				'default'               => $default_value,
-				'transport'             => 'postMessage',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => 'sanitize_text_field',
-				'sanitize_js_callback'  => '',
+				'type'                 => 'option',
+				'default'              => $default_value,
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => 'sanitize_text_field',
+				'sanitize_js_callback' => '',
 			)
 		);
 
@@ -283,10 +279,10 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				$wp_customize,
 				sanitize_key( $setting_id ),
 				array(
-					'label'         => $label,
-					'type'          => 'text',
-					'section'       => $section,
-					'settings'      => $setting_id,
+					'label'    => $label,
+					'type'     => 'text',
+					'section'  => $section,
+					'settings' => $setting_id,
 				)
 			)
 		);
@@ -308,25 +304,25 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$wp_customize->add_setting(
 			$setting_id,
 			array(
-				'type'                  => 'option',
-				'default'               => $default_value,
-				'transport'             => 'postMessage',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => array( $this, 'sanitize_image' ),
-				'sanitize_js_callback'  => '',
+				'type'                 => 'option',
+				'default'              => $default_value,
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => array( $this, 'sanitize_image' ),
+				'sanitize_js_callback' => '',
 			)
 		);
-		
+
 		$this->add_control(
 			$wp_customize,
 			new WP_Customize_Image_Control(
 				$wp_customize,
 				sanitize_key( $setting_id ),
 				array(
-					'label'       => $label,
-					'section'     => $section,
-					'settings'    => $setting_id,
-					'mime_type'   => 'image',
+					'label'     => $label,
+					'section'   => $section,
+					'settings'  => $setting_id,
+					'mime_type' => 'image',
 				)
 			)
 		);
@@ -380,7 +376,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$section_description .= __( 'Add your own CSS code here to customize the appearance and layout of your emails.', 'email-customizer' );
 		$section_description .= sprintf(
 			' <a href="%1$s" class="external-link" target="_blank">%2$s<span class="screen-reader-text"> %3$s</span></a>',
-			esc_url( __( 'https://codex.wordpress.org/CSS' ) ),
+			esc_url( 'https://codex.wordpress.org/CSS' ),
 			__( 'Learn more about CSS', 'email-customizer' ),
 			/* translators: Accessibility text. */
 			__( '(opens in a new tab)', 'email-customizer' )
@@ -410,12 +406,12 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		$wp_customize->add_setting(
 			'email_customizer[custom_css]',
 			array(
-				'type'                  => 'option',
-				'default'               => Email_Customizer_Defaults::additional_css(),
-				'transport'             => 'postMessage',
-				'capability'            => 'edit_theme_options',
-				'sanitize_callback'     => '',
-				'sanitize_js_callback'  => '',
+				'type'                 => 'option',
+				'default'              => Email_Customizer_Defaults::additional_css(),
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => '',
+				'sanitize_js_callback' => '',
 			)
 		);
 
@@ -450,7 +446,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$wp_customize,
 			'email_customizer_general',
 			array(
-				'title'         => __( 'General', 'email-customizer' ),
+				'title' => __( 'General', 'email-customizer' ),
 			)
 		);
 
@@ -513,7 +509,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$wp_customize,
 			'email_customizer_header',
 			array(
-				'title'         => __( 'Header', 'email-customizer' ),
+				'title' => __( 'Header', 'email-customizer' ),
 			)
 		);
 
@@ -594,7 +590,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$wp_customize,
 			'email_customizer_content',
 			array(
-				'title'         => __( 'Content', 'email-customizer' ),
+				'title' => __( 'Content', 'email-customizer' ),
 			)
 		);
 
@@ -656,7 +652,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			$wp_customize,
 			'email_customizer_footer',
 			array(
-				'title'         => __( 'Footer', 'email-customizer' ),
+				'title' => __( 'Footer', 'email-customizer' ),
 			)
 		);
 
@@ -723,14 +719,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 */
 	public function render_partial( $partial ) {
 
-		$customized = json_decode( wp_unslash( $_POST['customized'] ), true );
-		
+		$customized = json_decode( wp_unslash( $_POST['customized'] ), true ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
 		if ( empty( $customized ) || ! isset( $customized[ $partial->id ] ) ) {
-			return "&nbsp;";
+			return '&nbsp;';
 		}
 
 		$value = Email_Customizer_Template::parse_tags( $customized[ $partial->id ] );
-		return empty( $value ) ? "&nbsp;" : wp_kses_post( $value );
+		return empty( $value ) ? '&nbsp;' : wp_kses_post( $value );
 	}
 
 	/**
@@ -804,7 +800,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 */
 	public function get_option( $option, $default = '' ) {
 		$options = $this->get_options( 'email_customizer' );
-		return isset( $options[$option] ) ? $options[$option] : $default;
+		return isset( $options[ $option ] ) ? $options[ $option ] : $default;
 	}
 
 	/**
@@ -813,6 +809,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 */
 	public function is_autosaving() {
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( empty( $_POST['customize_changeset_data'] ) && empty( $_POST['customized'] ) ) {
 			return false;
 		}
@@ -822,6 +819,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 		}
 
 		return strpos( $_POST['customized'], 'email_customizer' ) !== false;
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 	}
 

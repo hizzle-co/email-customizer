@@ -28,16 +28,16 @@ class Email_Customizer {
 
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function __construct(){
+	public function __construct() {
 
-        // Load plugin files.
-        $this->include_files();
+		// Load plugin files.
+		$this->include_files();
 
-        // Init the admin.
+		// Init the admin.
 		$this->admin  = new Email_Customizer_Admin( 'email_customizer_customize' );
 
 		// Init the mailer.
@@ -59,6 +59,6 @@ class Email_Customizer {
 		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-template.php';
 		require_once plugin_dir_path( __FILE__ ) . 'class-email-customizer-mailer.php';
 
-    }
+	}
 
 }

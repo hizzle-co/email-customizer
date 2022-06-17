@@ -47,7 +47,7 @@ class Email_Customizer_Mailer {
 		add_action( 'wp_mail_content_type', array( $this, 'maybe_force_html' ), 100 );
 		add_action( 'email_customizer_email_content', array( $this, 'maybe_remove_body' ), 5 );
 		add_action( 'email_customizer_email_content', array( $this, 'maybe_convert_to_html' ), 8 );
-		add_action( 'noptin_generate_preview_email', array( $this, 'maybe_process_noptin_email' ) );
+		add_filter( 'noptin_email_after_apply_template', array( $this, 'maybe_process_noptin_email' ), 10, 2 );
 
 	}
 
@@ -80,9 +80,9 @@ class Email_Customizer_Mailer {
 	 */
 	protected function add_template( $email_content ) {
 
-		$email_content   = apply_filters( 'email_customizer_email_content', $email_content );
-		$args            = get_option( 'email_customizer', array() );
-		$args            = is_array( $args ) ? $args : array();
+		$email_content = apply_filters( 'email_customizer_email_content', $email_content );
+		$args          = get_option( 'email_customizer', array() );
+		$args          = is_array( $args ) ? $args : array();
 
 		if ( ! is_null( self::$custom_footer_1 ) ) {
 			$args['footer_1']      = self::$custom_footer_1;
@@ -114,7 +114,7 @@ class Email_Customizer_Mailer {
 	public function is_wrapped( $maybe_html_content ) {
 
 		$matches = array();
-		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
+		preg_match( '/<body[^>]*>(.*?)<\/body>/is', $maybe_html_content, $matches );
 
 		if ( ! empty( $matches[1] ) ) {
 			return true;
@@ -134,7 +134,7 @@ class Email_Customizer_Mailer {
 	public function maybe_remove_body( $maybe_html_content ) {
 
 		$matches = array();
-		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
+		preg_match( '/<body[^>]*>(.*?)<\/body>/is', $maybe_html_content, $matches );
 
 		$this->forced_html = empty( $matches[1] );
 
@@ -202,19 +202,17 @@ class Email_Customizer_Mailer {
 	 * Process a custom email.
 	 *
 	 * @since 1.0.0
-	 * @param string $maybe_html_content The email content.
+	 * @param string $email.
+	 * @param Noptin_Email_Generator $generator
 	 * @return string
 	 */
-	public function maybe_process_noptin_email( $maybe_html_content ) {
+	public function maybe_process_noptin_email( $email, $generator ) {
 
-		$matches = array();
-		preg_match( "/<body[^>]*>(.*?)<\/body>/is", $maybe_html_content, $matches );
-
-		if ( ! empty( $matches[1] ) ) {
-			return $maybe_html_content;
+		if ( 'default' === $generator->template ) {
+			self::$custom_footer_2 = $generator->footer_text;
+			self::$preview_text    = $generator->preview_text;
+			return $this->add_template( $email );
 		}
-
-		return $this->add_template( $maybe_html_content );
 
 	}
 

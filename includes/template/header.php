@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo get_bloginfo('charset');?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 	<!--[if !mso]><!-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!--<![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="x-apple-disable-message-reformatting">
-    <title><?php echo get_bloginfo('name'); ?></title>
+    <title><?php echo esc_html( get_bloginfo( 'name' ) ); ?></title>
 	<?php if ( is_customize_preview() ) : ?>
 		<?php do_action( 'wp_head' ); ?>
 	<?php endif; ?>
@@ -164,75 +164,75 @@
 
 		.template__container,
 		.hero-image {
-			width: <?php echo sanitize_text_field( $container_width ); ?>;
+			width: <?php echo esc_html( $container_width ); ?>;
 		}
 
 		.components__header .heading__left {
-			width: <?php echo sanitize_text_field( $header_left_width ); ?>;
+			width: <?php echo esc_html( $header_left_width ); ?>;
 		}
 
 		.card-spacing {
-			height: <?php echo sanitize_text_field( $spacing ); ?>;
+			height: <?php echo esc_html( $spacing ); ?>;
 		}
 
 		.components__header .components__inner {
-			background-color: <?php echo sanitize_hex_color( $header_bg ); ?>;
-            font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
+			background-color: <?php echo esc_html( sanitize_hex_color( $header_bg ) ); ?>;
+            font-size: <?php echo esc_html( $header_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $header_text_color ) ); ?>;
 		}
 
 		.components__header p,
 		.components__header div {
-			font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $header_text_color ); ?>;
+			font-size: <?php echo esc_html( $header_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $header_text_color ) ); ?>;
 		}
 
 		.components__header a,
 		.components__header a[x-apple-data-detectors] {
-			font-size: <?php echo sanitize_text_field( $header_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $header_link_color ); ?>;
+			font-size: <?php echo esc_html( $header_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $header_link_color ) ); ?>;
 		}
 
 		.components__content .components__inner {
-			background-color: <?php echo sanitize_hex_color( $content_bg ); ?>;
-            font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
+			background-color: <?php echo esc_html( sanitize_hex_color( $content_bg ) ); ?>;
+            font-size: <?php echo esc_html( $content_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $content_text_color ) ); ?>;
 		}
 
 		.components__content p,
 		.components__content div {
-			font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $content_text_color ); ?>;
+			font-size: <?php echo esc_html( $content_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $content_text_color ) ); ?>;
 		}
 
 		.components__content a,
 		.components__content a[x-apple-data-detectors] {
-			font-size: <?php echo sanitize_text_field( $content_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $content_link_color ); ?>;
+			font-size: <?php echo esc_html( $content_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $content_link_color ) ); ?>;
 		}
 
 		.components__footer .components__inner {
-			background-color: <?php echo sanitize_hex_color( $footer_bg ); ?>;
-            font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $footer_text_color ); ?>;
+			background-color: <?php echo esc_html( sanitize_hex_color( $footer_bg ) ); ?>;
+            font-size: <?php echo esc_html( $footer_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $footer_text_color ) ); ?>;
 		}
 
 		.components__footer p,
 		.components__footer div {
-			font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $footer_text_color ); ?>;
+			font-size: <?php echo esc_html( $footer_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $footer_text_color ) ); ?>;
 		}
 
 		.components__footer a,
 		.components__footer a[x-apple-data-detectors] {
-			font-size: <?php echo sanitize_text_field( $footer_font_size ); ?>;
-            color: <?php echo sanitize_hex_color( $footer_link_color ); ?>;
+			font-size: <?php echo esc_html( $footer_font_size ); ?>;
+            color: <?php echo esc_html( sanitize_hex_color( $footer_link_color ) ); ?>;
 		}
 
 	</style>
 
 	<style id="email-customizer-preview-custom-css">
-		<?php echo $custom_css; ?>
+		<?php echo wp_strip_all_tags( $custom_css ); /* Note that esc_html() cannot be used because `div &gt; span` is not interpreted properly. */ ?>
 	</style>
 
 	<!--[if gte mso 9]>
@@ -241,7 +241,7 @@
 			font-family: Helvetica, Arial, sans-serif !important;
 		}
 		.mso-col-100 {
-		  width: 100% !important;
+			width: 100% !important;
 		}
 	</style>
 	<![endif]-->

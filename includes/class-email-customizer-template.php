@@ -25,7 +25,7 @@ class Email_Customizer_Template {
 	public function __construct( $args, $is_preview = false ) {
 
 		if ( ! is_array( $args ) ) {
-			$args =  array();
+			$args = array();
 		}
 
 		if ( $is_preview && isset( $args['content'] ) ) {
@@ -57,7 +57,7 @@ class Email_Customizer_Template {
 	 */
 	public function render() {
 
-		extract( $this->args );
+		extract( $this->args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 
 		$path = apply_filters( 'email_customizer_template_path', plugin_dir_path( __FILE__ ) . 'template/' );
 		include $path . 'header.php';
@@ -85,9 +85,9 @@ class Email_Customizer_Template {
 	 */
 	public static function prepare_args( $args ) {
 
-		foreach ( array( 'footer_2', 'footer_1', 'header_2', 'header_1','before_content' ) as $key ) {
+		foreach ( array( 'footer_2', 'footer_1', 'header_2', 'header_1', 'before_content' ) as $key ) {
 			$value        = wp_kses_post( self::parse_tags( $args[ $key ] ) );
-			$value        = empty( $value ) ? "&nbsp;" : $value;
+			$value        = empty( $value ) ? '&nbsp;' : $value;
 			$args[ $key ] = $value;
 		}
 

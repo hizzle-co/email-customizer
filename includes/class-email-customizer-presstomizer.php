@@ -185,7 +185,7 @@ class Email_Customizer_Presstomizer {
 	 */
 	public function maybe_display_frontend() {
 
-		if ( is_customize_preview() && empty( $_POST['wp_customize_render_partials'] ) ) {
+		if ( is_customize_preview() && empty( $_POST['wp_customize_render_partials'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$this->display_frontend();
 			exit;
 		}
@@ -211,9 +211,9 @@ class Email_Customizer_Presstomizer {
 		$current_url   = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		return add_query_arg(
 			array(
-				'url'             => urlencode( $this->get_frontend_url( $action_prefix ) ),
-				'return'          => urlencode( $current_url ),
-				$this->id         => $action_prefix,
+				'url'     => rawurlencode( $this->get_frontend_url( $action_prefix ) ),
+				'return'  => rawurlencode( $current_url ),
+				$this->id => $action_prefix,
 			),
 			wp_customize_url()
 		);
@@ -263,7 +263,7 @@ class Email_Customizer_Presstomizer {
 				'customize-controls',
 				'query-monitor',
 				'dashicons-css',
-				$this->id
+				$this->id,
 			)
 		);
 
@@ -274,7 +274,7 @@ class Email_Customizer_Presstomizer {
 	 *
 	 * @since 1.0.0
 	 */
-	public function remove_external_scripts(){
+	public function remove_external_scripts() {
 		global $wp_scripts, $wp_styles;
 
 		$exceptions = $this->get_allowed_scripts();
@@ -283,21 +283,19 @@ class Email_Customizer_Presstomizer {
 
 			foreach ( $wp_scripts->queue as $handle ) {
 				$src = isset( $wp_scripts->registered[ $handle ] ) ? $wp_scripts->registered[ $handle ]->src : '';
-				if ( ! in_array( $handle, $exceptions ) && ! $wp_scripts->in_default_dir( $src ) && ! $this->is_built_in( $handle ) ) {
+				if ( ! in_array( $handle, $exceptions, true ) && ! $wp_scripts->in_default_dir( $src ) && ! $this->is_built_in( $handle ) ) {
 					wp_dequeue_script( $handle );
 				}
 			}
-
 		}
 
 		if ( is_object( $wp_styles ) && isset( $wp_styles->queue ) && is_array( $wp_styles->queue ) ) {
 
-			foreach ( $wp_styles->queue as $handle ){
-				if ( ! in_array( $handle, $exceptions ) && ! $this->is_built_in( $handle ) ) {
+			foreach ( $wp_styles->queue as $handle ) {
+				if ( ! in_array( $handle, $exceptions, true ) && ! $this->is_built_in( $handle ) ) {
 					wp_dequeue_style( $handle );
-				}				
+				}
 			}
-
 		}
 
 	}
@@ -310,7 +308,7 @@ class Email_Customizer_Presstomizer {
 	 */
 	protected function is_whitelisted( $cb ) {
 
-		if ( ! is_array(  $cb ) || ! is_object( $cb[0] ) ) {
+		if ( ! is_array( $cb ) || ! is_object( $cb[0] ) ) {
 			return false;
 		}
 
@@ -340,10 +338,9 @@ class Email_Customizer_Presstomizer {
 		foreach ( $handles as $id => $data ) {
 
 			// ... and remove handles that are not in our exceptions list.
-			if ( ! in_array( $data['function'], $exceptions ) && ! $this->is_whitelisted(  $data['function'] ) ) {
-				unset( $handles[$id] );
+			if ( ! in_array( $data['function'], $exceptions, true ) && ! $this->is_whitelisted( $data['function'] ) ) {
+				unset( $handles[ $id ] );
 			}
-
 		}
 
 		return $handles;
@@ -365,12 +362,12 @@ class Email_Customizer_Presstomizer {
 			'wp_generator',
 			'wp_site_icon',
 			'wp_no_robots',
-			array( $this, 'remove_external_scripts' )
+			array( $this, 'remove_external_scripts' ),
 		);
 
 		// Remove all callbacks that are not in the above array.
 		foreach ( $wp_filter['wp_head'] as $priority => $handles ) {
-			$wp_filter['wp_head'][ $priority ] = $this->remove_action_handles( $handles, $action_exceptions );
+			$wp_filter['wp_head'][ $priority ] = $this->remove_action_handles( $handles, $action_exceptions ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 	}
@@ -387,12 +384,12 @@ class Email_Customizer_Presstomizer {
 		$action_exceptions = array(
 			'wp_print_footer_scripts',
 			'wp_admin_bar_render',
-			array( $this, 'remove_external_scripts' )
+			array( $this, 'remove_external_scripts' ),
 		);
 
 		// Remove all callbacks that are not in the above array.
 		foreach ( $wp_filter['wp_footer'] as $priority => $handles ) {
-			$wp_filter['wp_footer'][ $priority ] = $this->remove_action_handles( $handles, $action_exceptions );			
+			$wp_filter['wp_footer'][ $priority ] = $this->remove_action_handles( $handles, $action_exceptions ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 	}

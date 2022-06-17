@@ -2,7 +2,7 @@
 Contributors: picocodes
 Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv3
@@ -56,6 +56,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 5. The hero image email template
 
 == Changelog ==
+
+= 1.0.3 - 2022-06-17 =
+* Noptin 1.7.4 support - ADDED
 
 = 1.0.2 - 2021-09-02 =
 * Filter Noptin preview email - ADDED
