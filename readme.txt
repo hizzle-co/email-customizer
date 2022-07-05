@@ -57,6 +57,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 
 == Changelog ==
 
+= 1.0.4 - 2022-07-05 =
+* Empty email body when the default template is not selected - FIXED
+
 = 1.0.3 - 2022-06-17 =
 * Noptin 1.7.4 support - ADDED
 

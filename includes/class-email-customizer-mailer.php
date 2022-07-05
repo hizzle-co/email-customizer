@@ -214,6 +214,7 @@ class Email_Customizer_Mailer {
 			return $this->add_template( $email );
 		}
 
+		return $email;
 	}
 
 }
