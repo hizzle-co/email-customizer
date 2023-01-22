@@ -290,6 +290,46 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	}
 
 	/**
+	 * Helper function to add a checkbox input control.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Customizer instance
+	 * @param string $setting_id The setting id
+	 * @param string $label The control label
+	 * @param string $section The section id
+	 * @param bool $default_value The default value
+	 *
+	 */
+	public function add_checkbox( $wp_customize, $setting_id, $label, $section, $default_value = false ) {
+
+		$wp_customize->add_setting(
+			$setting_id,
+			array(
+				'type'                 => 'option',
+				'default'              => $default_value,
+				'transport'            => 'postMessage',
+				'capability'           => 'edit_theme_options',
+				'sanitize_callback'    => 'wp_validate_boolean',
+				'sanitize_js_callback' => '',
+			)
+		);
+
+		$this->add_control(
+			$wp_customize,
+			new WP_Customize_Control(
+				$wp_customize,
+				sanitize_key( $setting_id ),
+				array(
+					'label'    => $label,
+					'type'     => 'checkbox',
+					'section'  => $section,
+					'settings' => $setting_id,
+				)
+			)
+		);
+
+	}
+
+	/**
 	 * Helper function to add an image control.
 	 *
 	 * @param WP_Customize_Manager $wp_customize Customizer instance
@@ -449,6 +489,17 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				'title' => __( 'General', 'email-customizer' ),
 			)
 		);
+
+		// Style WooCommerce Emails.
+		if ( class_exists( 'WooCommerce' ) ) {
+			$this->add_checkbox(
+				$wp_customize,
+				'email_customizer[style_woocommerce_emails]',
+				__( 'Style WooCommerce Emails', 'email-customizer' ),
+				'email_customizer_general',
+				false
+			);
+		}
 
 		// Container Width.
 		$this->add_text(

@@ -52,6 +52,35 @@ class Email_Customizer_Template {
 	}
 
 	/**
+	 * Displays the top part.
+	 *
+	 */
+	public function render_top() {
+
+		extract( $this->args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+
+		$path = apply_filters( 'email_customizer_template_path', plugin_dir_path( __FILE__ ) . 'template/' );
+		include $path . 'header.php';
+		include $path . 'heading.php';
+		include $path . 'content-top.php';
+
+	}
+
+	/**
+	 * Displays the bottom part.
+	 *
+	 */
+	public function render_bottom() {
+
+		extract( $this->args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+
+		$path = apply_filters( 'email_customizer_template_path', plugin_dir_path( __FILE__ ) . 'template/' );
+		include $path . 'content-bottom.php';
+		include $path . 'bottom.php';
+		include $path . 'footer.php';
+	}
+
+	/**
 	 * Displays the template.
 	 *
 	 */

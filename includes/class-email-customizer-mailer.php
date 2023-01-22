@@ -72,6 +72,41 @@ class Email_Customizer_Mailer {
 	}
 
 	/**
+	 * Prints the email header
+	 *
+	 * @param string $email_heading The email heading.
+	 * @since 1.0.5
+	 */
+	public function template_top( $email_heading ) {
+
+		$args                 = get_option( 'email_customizer', array() );
+		$args                 = is_array( $args ) ? $args : array();
+		$args['preview_text'] = self::$preview_text;
+		$template             = new Email_Customizer_Template( $args );
+
+		$template->render_top();
+
+		if ( ! empty( $email_heading ) ) {
+			echo '<h1 style="margin-bottom: 30px;font-size: 2rem;">' . wp_kses_post( $email_heading ) . '</h1>';
+		}
+	}
+
+	/**
+	 * Prints the email footer
+	 *
+	 * @since 1.0.5
+	 */
+	public function template_bottom() {
+
+		$args     = get_option( 'email_customizer', array() );
+		$args     = is_array( $args ) ? $args : array();
+		$template = new Email_Customizer_Template( $args );
+
+		$template->render_bottom();
+
+	}
+
+	/**
 	 * Wraps a given content with our template.
 	 *
 	 * @param $email_content string The email content.
