@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Email Customizer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-04 07:24+0000\n"
+"POT-Creation-Date: 2023-01-22 06:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,17 +16,17 @@ msgstr ""
 "X-Loco-Version: 2.4.0; wp-5.5.3"
 
 #. Accessibility text.
-#: includes/class-email-customizer-admin.php:386
+#: includes/class-email-customizer-admin.php:422
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:380
+#: includes/class-email-customizer-admin.php:416
 msgid ""
 "Add your own CSS code here to customize the appearance and layout of your "
 "emails."
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:404
+#: includes/class-email-customizer-admin.php:440
 msgid "Additional CSS"
 msgstr ""
 
@@ -36,40 +36,40 @@ msgid ""
 "template. The email content will appear here"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:497
-#: includes/class-email-customizer-admin.php:560
-#: includes/class-email-customizer-admin.php:622
-#: includes/class-email-customizer-admin.php:694
+#: includes/class-email-customizer-admin.php:544
+#: includes/class-email-customizer-admin.php:607
+#: includes/class-email-customizer-admin.php:669
+#: includes/class-email-customizer-admin.php:741
 msgid "Background Color"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:488
+#: includes/class-email-customizer-admin.php:535
 msgid "Background Image"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:605
+#: includes/class-email-customizer-admin.php:652
 msgid "Before Content"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:169
+#: includes/class-email-customizer-admin.php:165
 msgid "Change Template"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:170
-#: includes/class-email-customizer-admin.php:397
+#: includes/class-email-customizer-admin.php:166
+#: includes/class-email-customizer-admin.php:433
 #: includes/template/customizer-controls.php:25
 msgid "Close"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:461
+#: includes/class-email-customizer-admin.php:508
 msgid "Container Width"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:597
+#: includes/class-email-customizer-admin.php:644
 msgid "Content"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:428
+#: includes/class-email-customizer-admin.php:464
 msgid "Custom CSS"
 msgstr ""
 
@@ -125,37 +125,37 @@ msgstr ""
 msgid "Flat"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:551
-#: includes/class-email-customizer-admin.php:613
-#: includes/class-email-customizer-admin.php:685
+#: includes/class-email-customizer-admin.php:598
+#: includes/class-email-customizer-admin.php:660
+#: includes/class-email-customizer-admin.php:732
 msgid "Font Size"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:659
+#: includes/class-email-customizer-admin.php:706
 msgid "Footer"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:667
+#: includes/class-email-customizer-admin.php:714
 msgid "Footer Text 1"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:676
+#: includes/class-email-customizer-admin.php:723
 msgid "Footer Text 2"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:453
+#: includes/class-email-customizer-admin.php:489
 msgid "General"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:516
+#: includes/class-email-customizer-admin.php:563
 msgid "Header"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:533
+#: includes/class-email-customizer-admin.php:580
 msgid "Header Text 1"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:542
+#: includes/class-email-customizer-admin.php:589
 msgid "Header Text 2"
 msgstr ""
 
@@ -171,25 +171,25 @@ msgstr ""
 msgid "https://noptin.com"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:392
+#: includes/class-email-customizer-admin.php:428
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:384
+#: includes/class-email-customizer-admin.php:420
 msgid "Learn more about CSS"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:470
+#: includes/class-email-customizer-admin.php:517
 msgid "Left Header Width"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:578
-#: includes/class-email-customizer-admin.php:640
-#: includes/class-email-customizer-admin.php:712
+#: includes/class-email-customizer-admin.php:625
+#: includes/class-email-customizer-admin.php:687
+#: includes/class-email-customizer-admin.php:759
 msgid "Link Color"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:524
+#: includes/class-email-customizer-admin.php:571
 msgid "Logo"
 msgstr ""
 
@@ -197,23 +197,25 @@ msgstr ""
 msgid "Noptin Team"
 msgstr ""
 
+#. %1: photographer name, %2 stock photography site
 #: includes/class-email-customizer-defaults.php:310
 #, php-format
 msgid "Photo by %1$s on %2$s"
 msgstr ""
 
-#: includes/class-email-customizer-defaults.php:21
+#. %1: opening link tag, %2 closing link tag
+#: includes/class-email-customizer-defaults.php:22
 #, php-format
 msgid "Powered by the %1$sEmail Customizer%2$s WordPress plugin"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:394
+#: includes/class-email-customizer-admin.php:430
 msgid ""
 "Screen reader users: when in forms mode, you may need to press the Esc key "
 "twice."
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:479
+#: includes/class-email-customizer-admin.php:526
 msgid "Section Spacing"
 msgstr ""
 
@@ -225,18 +227,23 @@ msgstr ""
 msgid "Simple"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:569
-#: includes/class-email-customizer-admin.php:631
-#: includes/class-email-customizer-admin.php:703
+#: includes/class-email-customizer-admin.php:498
+msgid "Style WooCommerce Emails"
+msgstr ""
+
+#: includes/class-email-customizer-admin.php:616
+#: includes/class-email-customizer-admin.php:678
+#: includes/class-email-customizer-admin.php:750
 msgid "Text Color"
 msgstr ""
 
-#: includes/class-email-customizer-defaults.php:43
+#. %1: blog name, %2 current date
+#: includes/class-email-customizer-defaults.php:45
 #, php-format
 msgid "This email was sent from %1$s on %2$s"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:393
+#: includes/class-email-customizer-admin.php:429
 msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr ""
 
@@ -244,11 +251,11 @@ msgstr ""
 msgid "Use Template"
 msgstr ""
 
-#: includes/class-email-customizer-admin.php:390
+#: includes/class-email-customizer-admin.php:426
 msgid "When using a keyboard to navigate:"
 msgstr ""
 
-#: includes/class-email-customizer-defaults.php:307
+#: includes/class-email-customizer-defaults.php:306
 msgid "white hippie glasses neon light decor on door"
 msgstr ""
 

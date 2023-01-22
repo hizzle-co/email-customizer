@@ -2,7 +2,7 @@
 Contributors: picocodes
 Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv3
@@ -13,7 +13,7 @@ Easily replace the plain text WordPress emails with beautiful HTML emails that m
 
 == Description ==
 
-**Email Customizer is a lightweight Email Customizer Plugin For WordPress.**
+**Email Customizer is a lightweight Email Customizer Plugin For WordPress. Now works with WooCommerce**
 ★★★★★<br>
 
 With this plugin, you can convert the plain text emails that WordPress sends into beautiful HTML emails.
@@ -56,6 +56,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 5. The hero image email template
 
 == Changelog ==
+
+= 1.0.5 - 2023-01-22 =
+* Add ability to style WooCommerce emails - ADDED
 
 = 1.0.4 - 2022-07-05 =
 * Empty email body when the default template is not selected - FIXED
