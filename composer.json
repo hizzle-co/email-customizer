@@ -12,6 +12,6 @@
     "minimum-stability": "stable",
     "require": {
         "pelago/emogrifier": "6.0.0",
-        "symfony/css-selector": "6.1.3"
+        "symfony/css-selector": "6.2.3"
     }
 }
