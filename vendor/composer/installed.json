@@ -128,23 +128,23 @@
     },
     {
         "name": "symfony/css-selector",
-        "version": "v6.2.3",
-        "version_normalized": "6.2.3.0",
+        "version": "v6.2.7",
+        "version_normalized": "6.2.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/css-selector.git",
-            "reference": "ab1df4ba3ded7b724766ba3a6e0eca0418e74f80"
+            "reference": "aedf3cb0f5b929ec255d96bbb4909e9932c769e0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/css-selector/zipball/ab1df4ba3ded7b724766ba3a6e0eca0418e74f80",
-            "reference": "ab1df4ba3ded7b724766ba3a6e0eca0418e74f80",
+            "url": "https://api.github.com/repos/symfony/css-selector/zipball/aedf3cb0f5b929ec255d96bbb4909e9932c769e0",
+            "reference": "aedf3cb0f5b929ec255d96bbb4909e9932c769e0",
             "shasum": ""
         },
         "require": {
             "php": ">=8.1"
         },
-        "time": "2022-12-28T14:26:22+00:00",
+        "time": "2023-02-14T08:44:56+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
