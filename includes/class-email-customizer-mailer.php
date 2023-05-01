@@ -224,8 +224,29 @@ class Email_Customizer_Mailer {
 
 		try {
 
+			// Emogrifier urlencodes hrefs, copy the href to a new attribute and restore it after inlining.
+			$content = preg_replace_callback(
+				'/<a(.*?)href=["\'](.*?)["\'](.*?)>/mi',
+				function( $matches ) {
+					return "<a {$matches[1]} data-href=\"{$matches[2]}\" {$matches[3]}>";
+				},
+				$content
+			);
+
+			// Inline styles.
 			$emogrifier = Pelago\Emogrifier\CssInliner::fromHtml( $content );
-			return $emogrifier->inlineCss()->render();
+			$content    = $emogrifier->inlineCss()->render();
+
+			// Restore hrefs.
+			$content = preg_replace_callback(
+				'/<a(.*?)data-href=["\'](.*?)["\'](.*?)>/mi',
+				function( $matches ) {
+					return "<a {$matches[1]} href=\"{$matches[2]}\" {$matches[3]}>";
+				},
+				$content
+			);
+
+			return $content;
 
 		} catch ( Exception $e ) {
 			return $content;
