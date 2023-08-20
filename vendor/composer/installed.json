@@ -2,23 +2,23 @@
     "packages": [
         {
             "name": "symfony/css-selector",
-            "version": "v3.4.47",
-            "version_normalized": "3.4.47.0",
+            "version": "v6.3.2",
+            "version_normalized": "6.3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "da3d9da2ce0026771f5fe64cb332158f1bd2bc33"
+                "reference": "883d961421ab1709877c10ac99451632a3d6fa57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/da3d9da2ce0026771f5fe64cb332158f1bd2bc33",
-                "reference": "da3d9da2ce0026771f5fe64cb332158f1bd2bc33",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/883d961421ab1709877c10ac99451632a3d6fa57",
+                "reference": "883d961421ab1709877c10ac99451632a3d6fa57",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8"
+                "php": ">=8.1"
             },
-            "time": "2020-10-24T10:57:07+00:00",
+            "time": "2023-07-12T16:00:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -47,10 +47,10 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony CssSelector Component",
+            "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v3.4.47"
+                "source": "https://github.com/symfony/css-selector/tree/v6.3.2"
             },
             "funding": [
                 {
