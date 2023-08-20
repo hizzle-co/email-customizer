@@ -124,7 +124,10 @@
         .heading__left-title .logo {
             vertical-align: top;
             max-width: 100%;
-            width: 110px;
+            width: <?php echo empty( $logo_width ) ? '110px' : esc_html( $logo_width ); ?>;
+			<?php if ( ! empty( $logo_height ) ) : ?>
+				height: <?php echo esc_html( $logo_height ); ?>;
+			<?php endif; ?>
         }
 
         .hero-image {

@@ -1,3 +1,18 @@
+<?php
+/**
+ * Contains the main plugin class.
+ *
+ * @since 1.0.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$is_customize_preview = is_customize_preview();
+$show_header          = $is_customize_preview || ( ! empty( $header_1 ) || ! empty( $header_2 ) || ! empty( $logo ) );
+$height               = empty( $logo_height ) ? '25' : intval( $logo_height );
+$width                = empty( $logo_width ) ? '110' : intval( $logo_width );
+?>
+
 <!-- START COMPONENT: HEADER -->
 <tbody class="components__item components__header">
 	<tr>
@@ -12,28 +27,37 @@
 								<tr>
                                     <td class="heading__left-title">
 
-                                        <div class="heading__left-title-div">
-                                            <?php if ( ! empty( $logo ) || is_customize_preview() ) : ?>
-                                                <a href="<?php echo esc_url( home_url() ); ?>">
+										<table cellspacing="0" cellpadding="0" border="0" class="heading__left-title-div">
+											<tbody>
+												<tr>
+													<?php if ( ! empty( $logo ) || $is_customize_preview ) : ?>
+														<td valign="center">
+															<a href="<?php echo esc_url( home_url() ); ?>" style="display: inline-block;">
 
-                                                    <!--[if gte mso 9]>
-                                                        <img src="<?php echo esc_url( $logo ); ?>" width="110" height="25" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
-                                                    <![endif]-->
+																<!--[if gte mso 9]>
+																	<img src="<?php echo esc_url( $logo ); ?>" width="<?php echo esc_attr( $width ); ?>" height="<?php echo esc_attr( $height ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
+																<![endif]-->
 
-                                                    <!--[if !gte mso 9]><!-->
-                                                        <img class="logo" style="<?php echo empty( $logo ) ? 'display:none' : ''; ?>" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
-                                                    <!--<![endif]-->
-												</a>
-												&nbsp;
-                                            <?php endif; ?>
+																<!--[if !gte mso 9]><!-->
+																	<img class="logo" style="<?php echo empty( $logo ) ? 'display:none' : ''; ?>" src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_option( 'blogname' ) ); ?>">
+																<!--<![endif]-->
+															</a>
+															&nbsp;
+														</td>
+													<?php endif; ?>
 
-											<span class="heading__left-title-text">
-												<?php echo wp_kses_post( $header_1 ); ?>
-											</span>
+													<?php if ( ! empty( $header_1 ) || $is_customize_preview ) : ?>
+														<td valign="center">
+															<span class="heading__left-title-text">
+																<?php echo wp_kses_post( $header_1 ); ?>
+															</span>
+														</td>
+													<?php endif; ?>
+												</tr>
+											</tbody>
+										</table>
 
-                                        </div>
-
-                                    </td>
+									</td>
 								</tr>
 							</tbody>
                         </table>

@@ -20,7 +20,7 @@ class Email_Customizer_Defaults {
 		return sprintf(
 			/* translators: %1: opening link tag, %2 closing link tag */
 			__( 'Powered by the %1$sEmail Customizer%2$s WordPress plugin', 'email-customizer' ),
-			'<a href="https://github.com/hizzle-co/email-customizer">',
+			'<a href="https://hizzle.co/">',
 			'</a>'
 		);
 
@@ -116,6 +116,14 @@ class Email_Customizer_Defaults {
 	 * Logo.
 	 */
 	public static function logo() {
+
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+
+		// We have a logo. Logo is go.
+		if ( $custom_logo_id ) {
+			return wp_get_attachment_image_src( $custom_logo_id, 'full', false );
+		}
+
 		return '';
 	}
 

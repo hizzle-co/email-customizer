@@ -103,6 +103,8 @@ function email_customizer_image( control, selector ) {
 
 	// Heading.
 	email_customizer_image( 'email_customizer[logo]', '.heading__left-title-div .logo' );
+	email_customizer_css( 'email_customizer[logo_width]', 'width', '.email-body .heading__left-title .logo' );
+	email_customizer_css( 'email_customizer[logo_height]', 'height', '.email-body .heading__left-title .logo' );
 	email_customizer_css( 'email_customizer[header_font_size]', 'font-size', '.email-body .components__header a, .email-body .components__header p, .email-body .components__header div, .email-body .components__header .components__inner' );
 	email_customizer_css( 'email_customizer[header_bg]', 'background-color', '.email-body .components__header .components__inner' );
 	email_customizer_css( 'email_customizer[header_text_color]', 'color', '.email-body .components__header .components__inner, .email-body .components__header p, .email-body .components__header div' );

@@ -57,6 +57,10 @@ There are a lot of ways to contribute this newsletter plugin:-
 
 == Changelog ==
 
+= 1.0.7 - 2023-08-20 =
+* Ability to set width and height of the logo - ADDED
+* New installs default to site logo if no logo is set - ADDED
+
 = 1.0.6 - 2023-05-01 =
 * Fix merge tags appearing in URLs encoded - FIXED
 

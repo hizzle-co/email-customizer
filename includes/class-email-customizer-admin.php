@@ -259,7 +259,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 	 * @param string $default_value The default value
 	 *
 	 */
-	public function add_text( $wp_customize, $setting_id, $label, $section, $default_value = '' ) {
+	public function add_text( $wp_customize, $setting_id, $label, $section, $default_value = '', $type = 'text' ) {
 
 		$wp_customize->add_setting(
 			$setting_id,
@@ -280,7 +280,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 				sanitize_key( $setting_id ),
 				array(
 					'label'    => $label,
-					'type'     => 'text',
+					'type'     => $type,
 					'section'  => $section,
 					'settings' => $setting_id,
 				)
@@ -571,6 +571,21 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			__( 'Logo', 'email-customizer' ),
 			'email_customizer_header',
 			Email_Customizer_Defaults::logo()
+		);
+
+		$this->add_text(
+			$wp_customize,
+			'email_customizer[logo_width]',
+			__( 'Logo Width', 'email-customizer' ),
+			'email_customizer_header',
+			'110px'
+		);
+
+		$this->add_text(
+			$wp_customize,
+			'email_customizer[logo_height]',
+			__( 'Logo Height', 'email-customizer' ),
+			'email_customizer_header'
 		);
 
 		// Header text.  - Text on the left.
