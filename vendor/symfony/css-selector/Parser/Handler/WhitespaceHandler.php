@@ -27,7 +27,10 @@ use Symfony\Component\CssSelector\Parser\TokenStream;
  */
 class WhitespaceHandler implements HandlerInterface
 {
-    public function handle(Reader $reader, TokenStream $stream): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(Reader $reader, TokenStream $stream)
     {
         $match = $reader->findPattern('~^[ \t\r\n\f]+~');
 

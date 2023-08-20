@@ -217,8 +217,8 @@ class Email_Customizer_Mailer {
 	 */
 	public function inline_css( $content ) {
 
-		// Maybe abort early;
-		if ( ! class_exists( 'Pelago\Emogrifier\CssInliner' ) ) {
+		// Maybe abort early.
+		if ( ! class_exists( 'DOMDocument' ) || ! class_exists( '\TijsVerkoyen\CssToInlineStyles\CssToInlineStyles' ) ) {
 			return $content;
 		}
 
@@ -233,9 +233,11 @@ class Email_Customizer_Mailer {
 				$content
 			);
 
+			// create inliner instance
+			$inliner = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
+
 			// Inline styles.
-			$emogrifier = Pelago\Emogrifier\CssInliner::fromHtml( $content );
-			$content    = $emogrifier->inlineCss()->render();
+			$content = $inliner->convert( $content );
 
 			// Restore hrefs.
 			$content = preg_replace_callback(

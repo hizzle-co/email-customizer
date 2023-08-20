@@ -26,7 +26,10 @@ use Symfony\Component\CssSelector\Parser\TokenStream;
  */
 class CommentHandler implements HandlerInterface
 {
-    public function handle(Reader $reader, TokenStream $stream): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(Reader $reader, TokenStream $stream)
     {
         if ('/*' !== $reader->getSubstring(2)) {
             return false;

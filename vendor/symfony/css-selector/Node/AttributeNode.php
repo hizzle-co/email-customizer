@@ -23,13 +23,19 @@ namespace Symfony\Component\CssSelector\Node;
  */
 class AttributeNode extends AbstractNode
 {
-    private NodeInterface $selector;
-    private ?string $namespace;
-    private string $attribute;
-    private string $operator;
-    private ?string $value;
+    private $selector;
+    private $namespace;
+    private $attribute;
+    private $operator;
+    private $value;
 
-    public function __construct(NodeInterface $selector, ?string $namespace, string $attribute, string $operator, ?string $value)
+    /**
+     * @param string $namespace
+     * @param string $attribute
+     * @param string $operator
+     * @param string $value
+     */
+    public function __construct(NodeInterface $selector, $namespace, $attribute, $operator, $value)
     {
         $this->selector = $selector;
         $this->namespace = $namespace;
@@ -38,37 +44,58 @@ class AttributeNode extends AbstractNode
         $this->value = $value;
     }
 
-    public function getSelector(): NodeInterface
+    /**
+     * @return NodeInterface
+     */
+    public function getSelector()
     {
         return $this->selector;
     }
 
-    public function getNamespace(): ?string
+    /**
+     * @return string
+     */
+    public function getNamespace()
     {
         return $this->namespace;
     }
 
-    public function getAttribute(): string
+    /**
+     * @return string
+     */
+    public function getAttribute()
     {
         return $this->attribute;
     }
 
-    public function getOperator(): string
+    /**
+     * @return string
+     */
+    public function getOperator()
     {
         return $this->operator;
     }
 
-    public function getValue(): ?string
+    /**
+     * @return string
+     */
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function getSpecificity(): Specificity
+    /**
+     * {@inheritdoc}
+     */
+    public function getSpecificity()
     {
         return $this->selector->getSpecificity()->plus(new Specificity(0, 1, 0));
     }
 
-    public function __toString(): string
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
     {
         $attribute = $this->namespace ? $this->namespace.'|'.$this->attribute : $this->attribute;
 

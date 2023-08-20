@@ -7,25 +7,29 @@ namespace Composer\Autoload;
 class ComposerStaticInit451a563628a2cb3b8df442e51c9b2fc4
 {
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'TijsVerkoyen\\CssToInlineStyles\\' => 31,
+        ),
         'S' => 
         array (
             'Symfony\\Component\\CssSelector\\' => 30,
         ),
-        'P' => 
-        array (
-            'Pelago\\' => 7,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'TijsVerkoyen\\CssToInlineStyles\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
+        ),
         'Symfony\\Component\\CssSelector\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
-        'Pelago\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/pelago/emogrifier/src',
-        ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -33,6 +37,7 @@ class ComposerStaticInit451a563628a2cb3b8df442e51c9b2fc4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit451a563628a2cb3b8df442e51c9b2fc4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit451a563628a2cb3b8df442e51c9b2fc4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit451a563628a2cb3b8df442e51c9b2fc4::$classMap;
 
         }, null, ClassLoader::class);
     }

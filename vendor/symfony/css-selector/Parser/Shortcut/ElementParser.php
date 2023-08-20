@@ -27,7 +27,10 @@ use Symfony\Component\CssSelector\Parser\ParserInterface;
  */
 class ElementParser implements ParserInterface
 {
-    public function parse(string $source): array
+    /**
+     * {@inheritdoc}
+     */
+    public function parse($source)
     {
         // Matches an optional namespace, required element or `*`
         // $source = 'testns|testel';

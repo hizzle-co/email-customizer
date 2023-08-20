@@ -7,9 +7,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$heading_family = empty( $heading_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $heading_family );
-$content_family = empty( $content_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $content_family );
-$footer_family  = empty( $footer_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $footer_family );
+$heading_family = empty( $heading_family ) ? 'Arial, Helvetica, sans-serif' : $heading_family;
+$content_family = empty( $content_family ) ? 'Arial, Helvetica, sans-serif' : $content_family;
+$footer_family  = empty( $footer_family ) ? 'Arial, Helvetica, sans-serif' : $footer_family;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -180,15 +180,15 @@ $footer_family  = empty( $footer_family ) ? 'Arial, Helvetica, sans-serif' : san
 		}
 
 		.components__header {
-			font-family: <?php echo esc_html( $heading_family ); ?>;
+			font-family: <?php echo wp_strip_all_tags( $heading_family ); ?>;
 		}
 
 		.components__content {
-			font-family: <?php echo esc_html( $content_family ); ?>;
+			font-family: <?php echo wp_strip_all_tags( $content_family ); ?>;
 		}
 
 		.components__footer {
-			font-family: <?php echo esc_html( $footer_family ); ?>;
+			font-family: <?php echo wp_strip_all_tags( $footer_family ); ?>;
 		}
 
 		.template__container,
