@@ -4,7 +4,7 @@ Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
@@ -57,9 +57,10 @@ There are a lot of ways to contribute this newsletter plugin:-
 
 == Changelog ==
 
-= 1.0.7 - 2023-08-20 =
+= 1.0.8 - 2023-08-20 =
 * Ability to set width and height of the logo - ADDED
 * New installs default to site logo if no logo is set - ADDED
+* Allow specifying custom font families - ADDED
 
 = 1.0.6 - 2023-05-01 =
 * Fix merge tags appearing in URLs encoded - FIXED
