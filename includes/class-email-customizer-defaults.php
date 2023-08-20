@@ -121,7 +121,8 @@ class Email_Customizer_Defaults {
 
 		// We have a logo. Logo is go.
 		if ( $custom_logo_id ) {
-			return wp_get_attachment_image_src( $custom_logo_id, 'full', false );
+			$image = wp_get_attachment_image_src( $custom_logo_id, 'full', false );
+			return isset( $image[0] ) ? $image[0] : '';
 		}
 
 		return '';

@@ -578,7 +578,7 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			'email_customizer[logo_width]',
 			__( 'Logo Width', 'email-customizer' ),
 			'email_customizer_header',
-			'110px'
+			'24px'
 		);
 
 		$this->add_text(

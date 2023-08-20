@@ -9,8 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 $is_customize_preview = is_customize_preview();
 $show_header          = $is_customize_preview || ( ! empty( $header_1 ) || ! empty( $header_2 ) || ! empty( $logo ) );
-$height               = empty( $logo_height ) ? '25' : intval( $logo_height );
-$width                = empty( $logo_width ) ? '110' : intval( $logo_width );
+$height               = empty( $logo_height ) ? '24' : intval( $logo_height );
+$width                = empty( $logo_width ) ? '24' : intval( $logo_width );
 ?>
 
 <!-- START COMPONENT: HEADER -->
