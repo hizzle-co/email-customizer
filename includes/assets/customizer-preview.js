@@ -109,17 +109,20 @@ function email_customizer_image( control, selector ) {
 	email_customizer_css( 'email_customizer[header_bg]', 'background-color', '.email-body .components__header .components__inner' );
 	email_customizer_css( 'email_customizer[header_text_color]', 'color', '.email-body .components__header .components__inner, .email-body .components__header p, .email-body .components__header div' );
 	email_customizer_css( 'email_customizer[header_link_color]', 'color', '.email-body .components__header a' );
+	email_customizer_css( 'email_customizer[heading_family]', 'font-family', '.email-body .components__header' );
 
 	// Content.
 	email_customizer_css( 'email_customizer[content_font_size]', 'font-size', '.email-body .components__content a, .email-body .components__content p, .email-body .components__content div, .email-body .components__content .components__inner' );
 	email_customizer_css( 'email_customizer[content_bg]', 'background-color', '.email-body .components__content .components__inner' );
 	email_customizer_css( 'email_customizer[content_text_color]', 'color', '.email-body .components__content .components__inner, .email-body .components__content p, .email-body .components__content div' );
 	email_customizer_css( 'email_customizer[content_link_color]', 'color', '.email-body .components__content a' );
+	email_customizer_css( 'email_customizer[content_family]', 'font-family', '.email-body .components__content' );
 
 	// Footer.
 	email_customizer_css( 'email_customizer[footer_font_size]', 'font-size', '.email-body .components__footer a, .email-body .components__footer p, .email-body .components__footer div, .email-body .components__footer .components__inner' );
 	email_customizer_css( 'email_customizer[footer_bg]', 'background-color', '.components__footer .components__inner' );
 	email_customizer_css( 'email_customizer[footer_text_color]', 'color', '.email-body .components__footer .components__inner, .email-body .components__footer p, .email-body .components__footer div' );
 	email_customizer_css( 'email_customizer[footer_link_color]', 'color', '.email-body .components__footer a' );
+	email_customizer_css( 'email_customizer[footer_family]', 'font-family', '.email-body .components__footer' );
 
 } )( jQuery );

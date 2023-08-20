@@ -615,6 +615,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			Email_Customizer_Defaults::header_font_size()
 		);
 
+		// Font family.
+		$this->add_text(
+			$wp_customize,
+			'email_customizer[heading_family]',
+			__( 'Font Family', 'email-customizer' ),
+			'email_customizer_header'
+		);
+
 		// Background Color.
 		$this->add_color(
 			$wp_customize,
@@ -675,6 +683,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			__( 'Font Size', 'email-customizer' ),
 			'email_customizer_content',
 			Email_Customizer_Defaults::content_font_size()
+		);
+
+		// Font family.
+		$this->add_text(
+			$wp_customize,
+			'email_customizer[content_family]',
+			__( 'Font Family', 'email-customizer' ),
+			'email_customizer_content'
 		);
 
 		// Background Color.
@@ -747,6 +763,14 @@ class Email_Customizer_Admin extends Email_Customizer_Presstomizer {
 			__( 'Font Size', 'email-customizer' ),
 			'email_customizer_footer',
 			Email_Customizer_Defaults::footer_font_size()
+		);
+
+		// Font family.
+		$this->add_text(
+			$wp_customize,
+			'email_customizer[footer_family]',
+			__( 'Font Family', 'email-customizer' ),
+			'email_customizer_footer'
 		);
 
 		// Background Color.

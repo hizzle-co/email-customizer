@@ -1,3 +1,17 @@
+<?php
+/**
+ * Contains the main plugin class.
+ *
+ * @since 1.0.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$heading_family = empty( $heading_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $heading_family );
+$content_family = empty( $content_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $content_family );
+$footer_family  = empty( $footer_family ) ? 'Arial, Helvetica, sans-serif' : sanitize_text_field( $footer_family );
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -163,6 +177,18 @@
             background-size: cover;
 			<?php endif; ?>
 
+		}
+
+		.components__header {
+			font-family: <?php echo esc_html( $heading_family ); ?>;
+		}
+
+		.components__content {
+			font-family: <?php echo esc_html( $content_family ); ?>;
+		}
+
+		.components__footer {
+			font-family: <?php echo esc_html( $footer_family ); ?>;
 		}
 
 		.template__container,
