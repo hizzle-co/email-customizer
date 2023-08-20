@@ -2,7 +2,7 @@
 Contributors: picocodes
 Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.6
 Stable tag: 1.0.8
 License: GPLv3
