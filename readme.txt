@@ -2,9 +2,10 @@
 Contributors: picocodes
 Tags: email, email customizer, email designer, email template, HTML emails
 Requires at least: 4.7
-Tested up to: 6.3
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.0.8
+Version: 1.1.0
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
@@ -56,6 +57,9 @@ There are a lot of ways to contribute this newsletter plugin:-
 5. The hero image email template
 
 == Changelog ==
+
+= 1.1.0 - 2025-06-09 =
+* Test on WordPress 6.8
 
 = 1.0.8 - 2023-08-20 =
 * Ability to set width and height of the logo - ADDED
